@@ -1,5 +1,6 @@
-
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { AnimatedElement } from "@/components/AnimatedElement";
 import { Button } from "@/components/ui/button";
 import { 
   Code, 
@@ -131,114 +132,128 @@ const HireMe = () => {
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Hire Me
-            </span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            Ready to bring your ideas to life? Let's work together to create something amazing 
-            that drives results for your business.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-            <Button variant="hero" size="lg" className="group">
-              <Calendar className="w-4 h-4 mr-2" />
-              Schedule a Call
-            </Button>
-            <Button variant="glass" size="lg">
-              <DollarSign className="w-4 h-4 mr-2" />
-              Get a Quote
-            </Button>
-          </div>
+          <AnimatedElement animation="fade-in-up">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Hire Me
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+              Ready to bring your ideas to life? Let's work together to create something amazing 
+              that drives results for your business.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="hero" size="lg" className="group">
+                <Calendar className="w-4 h-4 mr-2" />
+                Schedule a Call
+              </Button>
+              <Button variant="glass" size="lg">
+                <DollarSign className="w-4 h-4 mr-2" />
+                Get a Quote
+              </Button>
+            </div>
+          </AnimatedElement>
         </div>
       </section>
 
       {/* Services Section */}
       <section className="py-16 px-6 bg-muted/20">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Services I Offer
-            </span>
-          </h2>
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Services I Offer
+              </span>
+            </h2>
+          </AnimatedElement>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {services.map((service, index) => (
-              <div 
+              <AnimatedElement 
                 key={service.id} 
-                className={`bg-gradient-card border rounded-xl p-6 cursor-pointer transition-all duration-300 animate-fade-in-up ${
-                  selectedService === service.id 
-                    ? 'border-primary shadow-glow' 
-                    : 'border-border hover:border-primary/50'
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => setSelectedService(service.id)}
+                animation="scale-in"
+                delay={index * 100}
               >
-                <div className="text-primary mb-4">
-                  {service.icon}
+                <div 
+                  className={`bg-gradient-card border rounded-xl p-6 cursor-pointer transition-all duration-300 ${
+                    selectedService === service.id 
+                      ? 'border-primary shadow-glow' 
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                  onClick={() => setSelectedService(service.id)}
+                >
+                  <div className="text-primary mb-4">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-4">{service.description}</p>
+                  <p className="text-primary font-semibold">{service.price}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">{service.description}</p>
-                <p className="text-primary font-semibold">{service.price}</p>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
 
           {/* Selected Service Details */}
-          <div className="bg-gradient-card border border-border rounded-2xl p-8 animate-fade-in-up">
-            {services.filter(service => service.id === selectedService).map(service => (
-              <div key={service.id} className="grid lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="text-primary">
-                      {service.icon}
+          <AnimatedElement animation="fade-in-up">
+            <div className="bg-gradient-card border border-border rounded-2xl p-8">
+              {services.filter(service => service.id === selectedService).map(service => (
+                <div key={service.id} className="grid lg:grid-cols-2 gap-8 items-center">
+                  <div>
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="text-primary">
+                        {service.icon}
+                      </div>
+                      <h3 className="text-3xl font-bold">{service.title}</h3>
                     </div>
-                    <h3 className="text-3xl font-bold">{service.title}</h3>
+                    <p className="text-muted-foreground mb-6 text-lg">{service.description}</p>
+                    <p className="text-2xl font-bold text-primary mb-6">{service.price}</p>
+                    <Button variant="hero" size="lg" className="group">
+                      Get Started
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Button>
                   </div>
-                  <p className="text-muted-foreground mb-6 text-lg">{service.description}</p>
-                  <p className="text-2xl font-bold text-primary mb-6">{service.price}</p>
-                  <Button variant="hero" size="lg" className="group">
-                    Get Started
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Button>
+                  <div>
+                    <h4 className="text-xl font-semibold mb-4">What's Included:</h4>
+                    <ul className="space-y-3">
+                      {service.features.map((feature, index) => (
+                        <li key={index} className="flex items-center gap-3">
+                          <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-4">What's Included:</h4>
-                  <ul className="space-y-3">
-                    {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimatedElement>
         </div>
       </section>
 
       {/* Process Section */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              My Process
-            </span>
-          </h2>
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                My Process
+              </span>
+            </h2>
+          </AnimatedElement>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {process.map((step, index) => (
-              <div 
+              <AnimatedElement 
                 key={index} 
-                className="text-center animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
+                animation="fade-in-up"
+                delay={index * 200}
               >
-                <div className="bg-gradient-primary text-primary-foreground w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mb-4 mx-auto">
-                  {step.step}
+                <div className="text-center">
+                  <div className="bg-gradient-primary text-primary-foreground w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mb-4 mx-auto">
+                    {step.step}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
         </div>
@@ -247,34 +262,38 @@ const HireMe = () => {
       {/* Testimonials Section */}
       <section className="py-16 px-6 bg-muted/20">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              What Clients Say
-            </span>
-          </h2>
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                What Clients Say
+              </span>
+            </h2>
+          </AnimatedElement>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div 
+              <AnimatedElement 
                 key={index} 
-                className="bg-gradient-card border border-border rounded-xl p-6 animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
+                animation="fade-in-up"
+                delay={index * 200}
               >
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  "{testimonial.content}"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="text-3xl">{testimonial.avatar}</div>
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                <div className="bg-gradient-card border border-border rounded-xl p-6">
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    "{testimonial.content}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="text-3xl">{testimonial.avatar}</div>
+                    <div>
+                      <p className="font-semibold">{testimonial.name}</p>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
         </div>
@@ -283,45 +302,57 @@ const HireMe = () => {
       {/* Pricing & Availability */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Pricing & Availability
-            </span>
-          </h2>
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Pricing & Availability
+              </span>
+            </h2>
+          </AnimatedElement>
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gradient-card border border-border rounded-xl p-6 text-center animate-fade-in-up">
-              <Clock className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Response Time</h3>
-              <p className="text-muted-foreground">Within 24 hours</p>
-            </div>
-            <div className="bg-gradient-card border border-border rounded-xl p-6 text-center animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <Calendar className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Availability</h3>
-              <p className="text-muted-foreground">Starting January 2025</p>
-            </div>
-            <div className="bg-gradient-card border border-border rounded-xl p-6 text-center animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-              <DollarSign className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Pricing</h3>
-              <p className="text-muted-foreground">Competitive rates</p>
-            </div>
+            <AnimatedElement animation="scale-in">
+              <div className="bg-gradient-card border border-border rounded-xl p-6 text-center">
+                <Clock className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Response Time</h3>
+                <p className="text-muted-foreground">Within 24 hours</p>
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="scale-in" delay={200}>
+              <div className="bg-gradient-card border border-border rounded-xl p-6 text-center">
+                <Calendar className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Availability</h3>
+                <p className="text-muted-foreground">Starting January 2025</p>
+              </div>
+            </AnimatedElement>
+            <AnimatedElement animation="scale-in" delay={400}>
+              <div className="bg-gradient-card border border-border rounded-xl p-6 text-center">
+                <DollarSign className="w-8 h-8 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Pricing</h3>
+                <p className="text-muted-foreground">Competitive rates</p>
+              </div>
+            </AnimatedElement>
           </div>
-          <div className="text-center bg-gradient-card border border-border rounded-2xl p-8 animate-fade-in-up">
-            <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
-            <p className="text-muted-foreground mb-6">
-              Let's discuss your requirements and create something amazing together.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" className="group">
-                <Calendar className="w-4 h-4 mr-2" />
-                Schedule a Call
-              </Button>
-              <Button variant="glass" size="lg">
-                Send a Message
-              </Button>
+          <AnimatedElement animation="fade-in-up">
+            <div className="text-center bg-gradient-card border border-border rounded-2xl p-8">
+              <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
+              <p className="text-muted-foreground mb-6">
+                Let's discuss your requirements and create something amazing together.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="hero" size="lg" className="group">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Schedule a Call
+                </Button>
+                <Button variant="glass" size="lg">
+                  Send a Message
+                </Button>
+              </div>
             </div>
-          </div>
+          </AnimatedElement>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };

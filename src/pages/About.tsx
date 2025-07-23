@@ -1,13 +1,14 @@
-
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Code, Briefcase, GraduationCap, Download, Heart } from "lucide-react";
+import { AnimatedElement } from "@/components/AnimatedElement";
 
 const About = () => {
   const timeline = [
     {
       year: "2021-Present",
-      title: "Senior Frontend Developer",
+      title: "Senior Frontend Developer", 
       company: "Tech Innovation Corp",
       description: "Leading frontend development for multiple web applications, mentoring junior developers, and implementing modern React patterns.",
       icon: <Briefcase className="w-5 h-5" />,
@@ -52,7 +53,7 @@ const About = () => {
       <section className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in-up">
+            <AnimatedElement animation="fade-in-up">
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
                 <span className="bg-gradient-primary bg-clip-text text-transparent">
                   About Me
@@ -77,8 +78,8 @@ const About = () => {
                 <Download className="mr-2 w-4 h-4" />
                 Download Resume
               </Button>
-            </div>
-            <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+            </AnimatedElement>
+            <AnimatedElement animation="fade-in-up" delay={200}>
               <div className="bg-gradient-card border border-border rounded-3xl p-8 text-center">
                 <div className="w-48 h-48 mx-auto mb-6 bg-gradient-primary rounded-full flex items-center justify-center">
                   <div className="text-6xl">👨‍💻</div>
@@ -86,7 +87,7 @@ const About = () => {
                 <h3 className="text-2xl font-bold mb-2">John Developer</h3>
                 <p className="text-muted-foreground">Frontend Developer & UI/UX Enthusiast</p>
               </div>
-            </div>
+            </AnimatedElement>
           </div>
         </div>
       </section>
@@ -94,36 +95,40 @@ const About = () => {
       {/* Experience Timeline */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Professional Journey
-            </span>
-          </h2>
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Professional Journey
+              </span>
+            </h2>
+          </AnimatedElement>
           <div className="relative">
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-primary"></div>
             <div className="space-y-12">
               {timeline.map((item, index) => (
-                <div 
+                <AnimatedElement 
                   key={index} 
-                  className="relative flex items-start gap-8 animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.2}s` }}
+                  animation="fade-in-left"
+                  delay={index * 200}
                 >
-                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-card border-2 border-primary rounded-full flex items-center justify-center text-primary">
-                    {item.icon}
-                  </div>
-                  <div className="flex-1 bg-gradient-card border border-border rounded-xl p-6">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h3 className="text-xl font-semibold text-foreground">{item.title}</h3>
-                        <p className="text-primary font-medium">{item.company}</p>
-                      </div>
-                      <span className="text-sm text-muted-foreground bg-primary/10 px-3 py-1 rounded-full">
-                        {item.year}
-                      </span>
+                  <div className="relative flex items-start gap-8">
+                    <div className="flex-shrink-0 w-16 h-16 bg-gradient-card border-2 border-primary rounded-full flex items-center justify-center text-primary">
+                      {item.icon}
                     </div>
-                    <p className="text-muted-foreground">{item.description}</p>
+                    <div className="flex-1 bg-gradient-card border border-border rounded-xl p-6">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <h3 className="text-xl font-semibold text-foreground">{item.title}</h3>
+                          <p className="text-primary font-medium">{item.company}</p>
+                        </div>
+                        <span className="text-sm text-muted-foreground bg-primary/10 px-3 py-1 rounded-full">
+                          {item.year}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground">{item.description}</p>
+                    </div>
                   </div>
-                </div>
+                </AnimatedElement>
               ))}
             </div>
           </div>
@@ -133,17 +138,19 @@ const About = () => {
       {/* Skills Section */}
       <section className="py-16 px-6 bg-muted/20">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Technical Skills
-            </span>
-          </h2>
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Technical Skills
+              </span>
+            </h2>
+          </AnimatedElement>
           <div className="grid md:grid-cols-2 gap-8">
             {skills.map((skill, index) => (
-              <div 
+              <AnimatedElement 
                 key={index} 
-                className="animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                animation="fade-in-up"
+                delay={index * 100}
               >
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-medium text-foreground">{skill.name}</span>
@@ -155,7 +162,7 @@ const About = () => {
                     style={{ width: `${skill.level}%` }}
                   ></div>
                 </div>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
         </div>
@@ -164,24 +171,28 @@ const About = () => {
       {/* Interests Section */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 animate-fade-in-up">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Personal Interests
-            </span>
-          </h2>
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-4xl font-bold text-center mb-16">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                Personal Interests
+              </span>
+            </h2>
+          </AnimatedElement>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {interests.map((interest, index) => (
-              <div 
+              <AnimatedElement 
                 key={index} 
-                className="bg-gradient-card border border-border rounded-xl p-6 text-center hover:shadow-glow hover:border-primary/50 transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                animation="scale-in"
+                delay={index * 100}
               >
-                <div className="text-primary mb-4 flex justify-center">
-                  {interest.icon}
+                <div className="bg-gradient-card border border-border rounded-xl p-6 text-center hover:shadow-glow hover:border-primary/50 transition-all duration-300">
+                  <div className="text-primary mb-4 flex justify-center">
+                    {interest.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{interest.title}</h3>
+                  <p className="text-muted-foreground text-sm">{interest.description}</p>
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{interest.title}</h3>
-                <p className="text-muted-foreground text-sm">{interest.description}</p>
-              </div>
+              </AnimatedElement>
             ))}
           </div>
         </div>
@@ -189,21 +200,25 @@ const About = () => {
 
       {/* CTA Section */}
       <section className="py-16 px-6 bg-gradient-card border-t border-border">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-          <h2 className="text-3xl font-bold mb-4">Let's Work Together</h2>
-          <p className="text-muted-foreground mb-8">
-            I'm always open to discussing new opportunities and interesting projects.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg">
-              Get In Touch
-            </Button>
-            <Button variant="glass" size="lg">
-              View My Work
-            </Button>
-          </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <AnimatedElement animation="fade-in-up">
+            <h2 className="text-3xl font-bold mb-4">Let's Work Together</h2>
+            <p className="text-muted-foreground mb-8">
+              I'm always open to discussing new opportunities and interesting projects.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="hero" size="lg">
+                Get In Touch
+              </Button>
+              <Button variant="glass" size="lg">
+                View My Work
+              </Button>
+            </div>
+          </AnimatedElement>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 };
