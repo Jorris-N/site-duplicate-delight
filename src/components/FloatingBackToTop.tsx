@@ -32,13 +32,13 @@ export const FloatingBackToTop = () => {
     <button
       onClick={scrollToTop}
       className={`
-        fixed bottom-6 right-6 z-50 p-3 
+        fixed bottom-6 right-6 z-50 px-4 py-3 
         bg-gradient-primary text-white rounded-full shadow-elegant hover:shadow-glow
         transition-all duration-300 ease-out
         hover:scale-110 active:scale-95
         animate-fade-in
         ${isAnimating ? 'animate-pulse' : ''}
-        group
+        group flex items-center gap-2
       `}
       aria-label="Back to top"
     >
@@ -48,6 +48,9 @@ export const FloatingBackToTop = () => {
           ${isAnimating ? 'animate-bounce' : 'group-hover:-translate-y-1'}
         `} 
       />
+      <span className="hidden sm:block text-sm font-medium whitespace-nowrap">
+        Back to Top
+      </span>
     </button>
   );
 };
