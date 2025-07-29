@@ -1,5 +1,4 @@
 import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
 import { AnimatedElement } from "@/components/AnimatedElement";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Clock, Send, Github, Linkedin, Twitter } from "lucide-react";
@@ -305,8 +304,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Code, Briefcase, GraduationCap, Download, Heart } from "lucide-react";
 import { AnimatedElement } from "@/components/AnimatedElement";
@@ -217,8 +216,6 @@ const About = () => {
           </AnimatedElement>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

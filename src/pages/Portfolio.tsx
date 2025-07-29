@@ -1,5 +1,4 @@
 import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Filter } from "lucide-react";
 import { useState } from "react";
@@ -253,8 +252,6 @@ const Portfolio = () => {
           </AnimatedElement>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
