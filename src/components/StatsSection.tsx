@@ -1,5 +1,6 @@
 import { Award, Users, Coffee, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
+import { AnimatedElement } from "@/components/AnimatedElement";
 
 interface StatItemProps {
   icon: React.ReactNode;
@@ -30,19 +31,21 @@ const StatItem = ({ icon, value, label, delay }: StatItemProps) => {
   }, [finalValue, delay]);
 
   return (
-    <div className="text-center group animate-fade-in-up" style={{ animationDelay: `${delay}ms` }}>
-      <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-card border border-border rounded-2xl mb-4 group-hover:shadow-glow group-hover:scale-110 transition-all duration-300">
-        <div className="text-primary text-2xl">
-          {icon}
+    <AnimatedElement animation="scale-in" delay={delay} interactive>
+      <div className="text-center group">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-card border border-border rounded-2xl mb-4 group-hover:shadow-glow group-hover:scale-110 group-hover:animate-wiggle transition-all duration-500">
+          <div className="text-primary text-2xl group-hover:animate-bounce-subtle">
+            {icon}
+          </div>
+        </div>
+        <div className="text-3xl md:text-4xl font-bold text-foreground mb-2 group-hover:animate-pulse-glow">
+          {count}{value.includes('+') ? '+' : ''}
+        </div>
+        <div className="text-muted-foreground text-sm font-medium">
+          {label}
         </div>
       </div>
-      <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-        {count}{value.includes('+') ? '+' : ''}
-      </div>
-      <div className="text-muted-foreground text-sm font-medium">
-        {label}
-      </div>
-    </div>
+    </AnimatedElement>
   );
 };
 
@@ -77,17 +80,19 @@ export const StatsSection = () => {
   return (
     <section className="py-20 relative">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          {stats.map((stat, index) => (
-            <StatItem
-              key={index}
-              icon={stat.icon}
-              value={stat.value}
-              label={stat.label}
-              delay={stat.delay}
-            />
-          ))}
-        </div>
+        <AnimatedElement animation="fade-in-up" delay={0}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+            {stats.map((stat, index) => (
+              <StatItem
+                key={index}
+                icon={stat.icon}
+                value={stat.value}
+                label={stat.label}
+                delay={stat.delay}
+              />
+            ))}
+          </div>
+        </AnimatedElement>
       </div>
     </section>
   );

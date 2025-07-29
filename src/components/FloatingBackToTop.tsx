@@ -34,21 +34,21 @@ export const FloatingBackToTop = () => {
       className={`
         fixed bottom-6 right-6 z-50 px-4 py-3 
         bg-gradient-primary text-white rounded-full shadow-elegant hover:shadow-glow
-        transition-all duration-300 ease-out
-        hover:scale-110 active:scale-95
-        animate-fade-in
-        ${isAnimating ? 'animate-pulse' : ''}
+        transition-all duration-500 ease-spring
+        hover:scale-110 active:scale-95 hover:animate-magnetic-hover
+        animate-slide-up
+        ${isAnimating ? 'animate-bounce-subtle' : ''}
         group flex items-center gap-2
       `}
       aria-label="Back to top"
     >
       <ArrowUp 
         className={`
-          w-5 h-5 transition-transform duration-300 
-          ${isAnimating ? 'animate-bounce' : 'group-hover:-translate-y-1'}
+          w-5 h-5 transition-transform duration-500 ease-spring
+          ${isAnimating ? 'animate-bounce' : 'group-hover:-translate-y-2 group-hover:animate-wiggle'}
         `} 
       />
-      <span className="hidden sm:block text-sm font-medium whitespace-nowrap">
+      <span className="hidden sm:block text-sm font-medium whitespace-nowrap group-hover:animate-pulse-glow">
         Back to Top
       </span>
     </button>

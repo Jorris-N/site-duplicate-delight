@@ -4,11 +4,12 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface AnimatedElementProps {
   children: React.ReactNode;
-  animation?: 'fade-in' | 'fade-in-up' | 'fade-in-left' | 'fade-in-right' | 'scale-in' | 'slide-up';
+  animation?: 'fade-in' | 'fade-in-up' | 'fade-in-left' | 'fade-in-right' | 'scale-in' | 'slide-up' | 'reveal' | 'elastic' | 'bounce-subtle' | 'stagger';
   delay?: number;
   duration?: number;
   className?: string;
   triggerOnce?: boolean;
+  interactive?: boolean;
 }
 
 export const AnimatedElement: React.FC<AnimatedElementProps> = ({
@@ -18,11 +19,12 @@ export const AnimatedElement: React.FC<AnimatedElementProps> = ({
   duration = 600,
   className = '',
   triggerOnce = true,
+  interactive = false,
 }) => {
   const { elementRef, isVisible } = useScrollAnimation({ triggerOnce });
 
   const getAnimationClass = () => {
-    if (!isVisible) return 'opacity-0';
+    if (!isVisible) return 'opacity-0 translate-y-8';
     
     switch (animation) {
       case 'fade-in':
@@ -37,15 +39,32 @@ export const AnimatedElement: React.FC<AnimatedElementProps> = ({
         return 'animate-scale-in';
       case 'slide-up':
         return 'animate-slide-up';
+      case 'reveal':
+        return 'animate-reveal';
+      case 'elastic':
+        return 'animate-elastic';
+      case 'bounce-subtle':
+        return 'animate-bounce-subtle';
+      case 'stagger':
+        return 'animate-stagger';
       default:
         return 'animate-fade-in-up';
     }
   };
 
+  const interactiveClasses = interactive ? 
+    'hover:animate-magnetic-hover hover:shadow-glow transition-all duration-300 cursor-pointer group' : 
+    '';
+
   return (
     <div
       ref={elementRef}
-      className={`transition-all duration-${duration} ${getAnimationClass()} ${className}`}
+      className={`
+        transition-all ease-spring
+        ${getAnimationClass()} 
+        ${interactiveClasses}
+        ${className}
+      `}
       style={{
         animationDelay: `${delay}ms`,
         animationFillMode: 'both',
