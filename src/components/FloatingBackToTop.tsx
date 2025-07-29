@@ -32,13 +32,14 @@ export const FloatingBackToTop = () => {
     <button
       onClick={scrollToTop}
       className={`
-        fixed bottom-6 right-6 z-50 px-4 py-3 
+        fixed bottom-6 z-50 px-4 py-3 
         bg-gradient-primary text-white rounded-full shadow-elegant hover:shadow-glow
         transition-all duration-300 ease-out
         hover:scale-110 active:scale-95
         animate-fade-in
         ${isAnimating ? 'animate-pulse' : ''}
         group flex items-center gap-2
+        right-6 lg:right-[calc((100%-83.333%)/2+1.5rem)]
       `}
       aria-label="Back to top"
     >

@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Github, Linkedin, Mail, ArrowRight, Download } from "lucide-react";
@@ -7,16 +8,16 @@ export const HeroSection = () => {
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
       {/* Background gradient effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background/50">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" style={{ animationDelay: "2s" }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Developer Photo Section */}
-          <div className="flex justify-center lg:justify-end order-2 lg:order-1">
+          <div className="flex justify-center lg:justify-end order-1 lg:order-2">
             <div className="relative animate-fade-in">
-              <Avatar className="w-64 h-64 md:w-80 md:h-80 border-4 border-primary/20 shadow-elegant hover:shadow-glow transition-all duration-500 hover:scale-105 animate-float">
+              <Avatar className="w-64 h-64 md:w-80 md:h-80 border-4 border-primary/20 shadow-elegant hover:shadow-glow transition-all duration-500 hover:scale-105">
                 <AvatarImage src="/placeholder.svg" alt="Developer Profile" />
                 <AvatarFallback className="text-4xl md:text-5xl font-bold bg-gradient-primary text-white">JD</AvatarFallback>
               </Avatar>
@@ -26,10 +27,10 @@ export const HeroSection = () => {
           </div>
 
           {/* Content Section */}
-          <div className="text-center lg:text-left order-1 lg:order-2">
+          <div className="text-center lg:text-left order-2 lg:order-1">
             {/* Availability Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-sm font-medium mb-8 animate-fade-in">
-              <div className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse" />
+            <div className="inline-flex items-center px-4 py-2 hover:bg-primary/10 bg-green-600/20 border hover:border-primary/20 border-green-600/30 rounded-full text-green-400 text-sm font-medium mb-8 animate-fade-in ease-in-out duration-300 cursor-pointer">
+              <div className="w-2 h-2 bg-green-600 rounded-full mr-2 animate-pulse" />
               Available for Freelance
             </div>
 

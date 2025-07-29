@@ -1,5 +1,4 @@
 import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
 import { AnimatedElement } from "@/components/AnimatedElement";
 import { Button } from "@/components/ui/button";
 import { 
@@ -133,6 +132,13 @@ const HireMe = () => {
       <section className="pt-24 pb-16 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <AnimatedElement animation="fade-in-up">
+
+            {/* Availability Badge */}
+            <div className="inline-flex items-center px-4 py-2 hover:bg-primary/10 bg-green-600/20 border hover:border-primary/20 border-green-600/30 rounded-full text-green-400 text-sm font-medium mb-8 animate-fade-in ease-in-out duration-300 cursor-pointer">
+              <div className="w-2 h-2 bg-green-600 rounded-full mr-2 animate-pulse" />
+              Available for Projects
+            </div>
+
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-primary bg-clip-text text-transparent">
                 Hire Me
@@ -351,8 +357,6 @@ const HireMe = () => {
           </AnimatedElement>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
