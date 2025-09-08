@@ -16,10 +16,10 @@
     --popover: 220 26% 10%;
     --popover-foreground: 210 40% 98%;
 
-    /* Primary blue-purple gradient colors */
-    --primary: 240 100% 70%;
+    /* Professional corporate blue */
+    --primary: 214 84% 56%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 270 100% 80%;
+    --primary-glow: 214 84% 66%;
 
     --secondary: 220 26% 15%;
     --secondary-foreground: 210 40% 98%;
@@ -27,7 +27,7 @@
     --muted: 220 26% 12%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 270 100% 80%;
+    --accent: 214 84% 66%;
     --accent-foreground: 220 26% 7%;
 
     --destructive: 0 62.8% 30.6%;
@@ -35,24 +35,23 @@
 
     --border: 220 26% 15%;
     --input: 220 26% 15%;
-    --ring: 240 100% 70%;
+    --ring: 214 84% 56%;
 
     --radius: 0.75rem;
 
-    /* Custom portfolio colors */
-    --purple: 270 100% 80%;
-    --blue: 240 100% 70%;
-    --cyan: 190 100% 60%;
+    /* Professional corporate colors */
+    --blue: 214 84% 56%;
+    --blue-light: 214 84% 66%;
     --text-muted: 215 20.2% 65.1%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(240 100% 70%), hsl(270 100% 80%));
-    --gradient-hero: linear-gradient(135deg, hsl(240 100% 70%), hsl(270 100% 80%), hsl(300 100% 70%));
+    /* Professional gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(214 84% 56%), hsl(214 84% 66%));
+    --gradient-hero: linear-gradient(135deg, hsl(214 84% 56%), hsl(214 84% 66%), hsl(210 50% 60%));
     --gradient-card: linear-gradient(135deg, hsl(220 26% 10%), hsl(220 26% 12%));
     
-    /* Shadows and glows */
-    --shadow-primary: 0 10px 30px -10px hsl(240 100% 70% / 0.3);
-    --shadow-glow: 0 0 40px hsl(270 100% 80% / 0.4);
+    /* Professional shadows and glows */
+    --shadow-primary: 0 10px 30px -10px hsl(214 84% 56% / 0.2);
+    --shadow-glow: 0 0 30px hsl(214 84% 66% / 0.3);
     --shadow-card: 0 4px 20px hsl(220 26% 4% / 0.5);
     
     /* Transitions */
