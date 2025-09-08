@@ -23,17 +23,17 @@ export const Navigation = () => {
       <div className="px-6 mx-auto lg:w-10/12">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 animate-fade-in">
-            <div className="text-primary text-2xl font-bold">
-              &lt;/&gt;
+          <Link to="/" className="flex items-center space-x-3 animate-fade-in">
+            <div className="text-primary text-2xl font-bold absolute overflow-hidden">
+              <img src="/images/no-bg-logo.png" alt="" className="relative" style={{height: "65px", width: "100px"}} />
             </div>
-            <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent pl-[90px]">
               DevPortfolio
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item, index) => (
               <Link
                 key={item.label}
@@ -52,9 +52,9 @@ export const Navigation = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block animate-fade-in" style={{ animationDelay: "0.5s" }}>
+          <div className="hidden lg:block animate-fade-in" style={{ animationDelay: "0.5s" }}>
             <Link to="/hire-me">
-              <Button variant="hero" className="animate-glow-pulse">
+              <Button variant="hero" className="animate-glow" style={{ animationDelay: "2s" }}>
                 💼 Hire Me
               </Button>
             </Link>
@@ -63,7 +63,7 @@ export const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -71,7 +71,7 @@ export const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border/50 animate-fade-in">
+          <div className="lg:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border/50 animate-fade-in">
             <div className="px-6 py-4 space-y-4">
               {navItems.map((item) => (
                 <Link
