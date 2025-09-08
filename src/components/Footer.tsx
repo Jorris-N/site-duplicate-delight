@@ -50,9 +50,9 @@ export const Footer = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Brand Section */}
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">J</span>
+              <div className="flex flex-col items-start gap-3">
+                <div className="w-15 h-15 rounded-lg flex items-center justify-center ">
+                  <img src="/images/no-bg-logo.png" alt="" className="relative" style={{height: "65px", width: "100px"}} />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-foreground">John Developer</h3>
