@@ -12,6 +12,7 @@ import Articles from "./pages/Articles";
 import Contact from "./pages/Contact";
 import HireMe from "./pages/HireMe";
 import NotFound from "./pages/NotFound";
+import ColorPalettePreview from "./components/ColorPalettePreview";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/articles" element={<Articles />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/hire-me" element={<HireMe />} />
+            <Route path="/colors" element={<ColorPalettePreview />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <FloatingBackToTop />
