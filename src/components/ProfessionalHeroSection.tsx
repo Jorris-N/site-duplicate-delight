@@ -1,10 +1,16 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Github, Linkedin, Mail, ArrowRight, Download, ExternalLink, Star, Users, Coffee } from "lucide-react";
+import { useTypewriter } from "@/hooks/useTypewriter";
 
 export const ProfessionalHeroSection = () => {
+  const typewriterText = useTypewriter([
+    'Front-End Developer',
+    'Web Developer', 
+    'Software Developer',
+    'Search Engine Optimization'
+  ], 100, 50, 2000);
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
       {/* Background gradient effect */}
@@ -16,12 +22,20 @@ export const ProfessionalHeroSection = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Developer Photo Section */}
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+          <div className="flex justify-center lg:justify-end order-2 lg:order-2">
             <div className="relative animate-fade-in">
-              <Avatar className="w-64 h-64 md:w-80 md:h-80 border-4 border-primary/20 shadow-card hover:shadow-glow transition-all duration-500 hover:scale-105">
-                <AvatarImage src="/images/Jorris1.jpg" alt="Jorris - Senior Frontend Developer" />
-                <AvatarFallback className="text-4xl md:text-5xl font-bold bg-gradient-primary text-white font-heading">JD</AvatarFallback>
-              </Avatar>
+              <div className="relative w-64 h-64 md:w-80 md:h-80">
+                <div 
+                  className="w-full h-full border-4 border-primary/20 shadow-card hover:shadow-glow transition-all duration-500 hover:scale-105"
+                  style={{ 
+                    aspectRatio: '1/1',
+                    borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                    background: `url('/images/Jorris1.jpg') center/cover no-repeat`
+                  }}
+                  role="img"
+                  aria-label="Jorris - Senior Frontend Developer"
+                />
+              </div>
               {/* Professional status indicator */}
               <div className="absolute -bottom-4 -right-4 bg-card border-2 border-primary rounded-full p-3 shadow-glow">
                 <Star className="h-6 w-6 text-primary fill-primary" />
@@ -30,7 +44,7 @@ export const ProfessionalHeroSection = () => {
           </div>
 
           {/* Content Section */}
-          <div className="text-center lg:text-left order-2 lg:order-1">
+          <div className="text-center lg:text-left order-1 lg:order-1">
             {/* Professional Status */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-8">
               <Badge variant="default" className="inline-flex items-center px-4 py-2 bg-green-600/20 border-green-600/30 text-green-400 hover:bg-green-600/30">
@@ -48,7 +62,7 @@ export const ProfessionalHeroSection = () => {
               <span className="text-foreground">Senior</span>
               <br />
               <span className="bg-gradient-hero bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient-shift">
-                Frontend Developer
+                {typewriterText}<span className="animate-pulse">|</span>
               </span>
             </h1>
 
