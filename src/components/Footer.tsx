@@ -32,7 +32,7 @@ export const Footer = () => {
   const socialLinks = [
     { icon: <Linkedin className="w-5 h-5" />, href: '#', label: 'LinkedIn', color: 'hover:text-blue-400' },
     { icon: <Github className="w-5 h-5" />, href: '#', label: 'GitHub', color: 'hover:text-gray-300' },
-    { icon: <Twitter className="w-5 h-5" />, href: '#', label: 'Twitter', color: 'hover:text-blue-400' },
+    { icon: <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="currentColor" d="M12.186 8.672 18.743.947h-2.927l-5.005 5.9-4.44-5.9H0l7.434 9.876-6.986 8.23h2.927l5.434-6.4 4.82 6.4H20L12.186 8.672Zm-2.267 2.671L8.544 9.515 3.2 2.42h2.2l4.312 5.719 1.375 1.828 5.731 7.613h-2.2l-4.699-6.237Z"></path></svg>, href: '#', label: 'Twitter', color: 'hover:text-blue-400' },
     { icon: <Mail className="w-5 h-5" />, href: 'mailto:hello@johndeveloper.com', label: 'Email', color: 'hover:text-red-400' },
   ];
 
@@ -55,7 +55,7 @@ export const Footer = () => {
                   <img src="/images/no-bg-logo.png" alt="" className="relative" style={{height: "65px", width: "100px"}} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-foreground">John Developer</h3>
+                  <h3 className="text-xl font-bold text-foreground">Jorris</h3>
                   <p className="text-sm text-muted-foreground">Frontend Developer</p>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export const Footer = () => {
         <div className="border-t border-border">
           <div className="max-w-7xl mx-auto px-6 py-6">
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <span>© 2025 John Developer. All rights reserved.</span>
+              <span>© 2025 Jorris. All rights reserved.</span>
               <span className="hidden md:inline">•</span>
               <span className="hidden md:inline">Made with</span>
               <Heart className="w-4 h-4 text-red-500 animate-pulse hidden md:inline" />

@@ -1,4 +1,4 @@
-import { Award, Users, Coffee, Calendar } from "lucide-react";
+import { Award, Users, Calendar, Signal } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface StatItemProps {
@@ -37,7 +37,7 @@ const StatItem = ({ icon, value, label, delay }: StatItemProps) => {
         </div>
       </div>
       <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-        {count}{value.includes('+') ? '+' : ''}
+        {count}{value.includes('+') ? '+' : ''}{value.includes('%') ? '%' : ''}
       </div>
       <div className="text-muted-foreground text-sm font-medium">
         {label}
@@ -50,20 +50,20 @@ export const StatsSection = () => {
   const stats = [
     {
       icon: <Award />,
-      value: "50+",
+      value: "30+",
       label: "Projects Completed",
       delay: 200,
     },
     {
       icon: <Users />,
-      value: "30+",
+      value: "15+",
       label: "Happy Clients",
       delay: 400,
     },
     {
-      icon: <Coffee />,
-      value: "1000+",
-      label: "Cups of Coffee",
+      icon: <Signal />,
+      value: "90%",
+      label: "Code Success",
       delay: 600,
     },
     {
