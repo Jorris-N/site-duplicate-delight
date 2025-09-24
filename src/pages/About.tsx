@@ -83,7 +83,7 @@ const About = () => {
                 <div className="w-48 h-48 mx-auto mb-6 bg-gradient-primary rounded-full flex items-center justify-center">
                   <div className="text-6xl">👨‍💻</div>
                 </div>
-                <h3 className="text-2xl font-bold mb-2">John Developer</h3>
+                <h3 className="text-2xl font-bold mb-2">Jorris</h3>
                 <p className="text-muted-foreground">Frontend Developer & UI/UX Enthusiast</p>
               </div>
             </AnimatedElement>

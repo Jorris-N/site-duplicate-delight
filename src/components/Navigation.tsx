@@ -28,7 +28,7 @@ export const Navigation = () => {
               <img src="/images/no-bg-logo.png" alt="" className="relative" style={{height: "65px", width: "100px"}} />
             </div>
             <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent pl-[90px]">
-              DevPortfolio
+              Jorris
             </span>
           </Link>
 
