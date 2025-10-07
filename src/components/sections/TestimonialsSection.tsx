@@ -7,27 +7,27 @@ import { Star, Quote } from "lucide-react";
 export const TestimonialsSection = () => {
   const testimonials = [
     {
-      name: "Sarah Chen",
-      role: "Product Manager",
-      company: "TechFlow Solutions",
+      name: "Lucas",
+      role: "Manager",
+      company: "Lukeman Homestays & Airbnb",
       image: "/placeholder.svg",
-      content: "Jorris delivered exceptional results on our e-commerce platform. His attention to detail and technical expertise helped us achieve a 40% improvement in conversion rates.",
+      content: "Working with Jorris was a dream. Responsive, creative, and always exceeding our wildest web dreams. Lukeman Homestays & Airbnb is forever grateful.",
       rating: 5
     },
     {
-      name: "Michael Rodriguez",
-      role: "CTO",
-      company: "StartupLab",
+      name: "Edson Murimi",
+      role: "Founder",
+      company: "Edmil Solutions Ltd.",
       image: "/placeholder.svg",
-      content: "Working with Jorris was a game-changer for our startup. He built our entire frontend architecture and mentored our junior developers. Highly recommended!",
+      content: "Edmil Solution's sleek website perfectly balances professional and modern. Your design genius boosted inquiries, exceeding expectations!",
       rating: 5
     },
     {
-      name: "Emily Johnson",
-      role: "Design Director",
-      company: "Creative Studio",
+      name: "Rajab Itambo",
+      role: "Director",
+      company: "Heart of Hep Foundation",
       image: "/placeholder.svg",
-      content: "Jorris has an incredible ability to translate complex designs into pixel-perfect, performant applications. Our collaboration resulted in award-winning user interfaces.",
+      content: "Jorris crafted a website that beautifully showcases our stories and impact. The interactive elements are engaging and keep visitors coming back.",
       rating: 5
     }
   ];

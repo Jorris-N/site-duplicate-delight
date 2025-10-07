@@ -23,17 +23,17 @@ export const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: <MapPin className="w-4 h-4" />, text: 'San Francisco, CA' },
-    { icon: <Phone className="w-4 h-4" />, text: '+1 (555) 123-4567' },
-    { icon: <MessageCircle className="w-4 h-4" />, text: 'WhatsApp' },
-    { icon: <Mail className="w-4 h-4" />, text: 'hello@johndeveloper.com' },
+    { icon: <MapPin className="w-4 h-4" />, text: 'Mombasa, Kenya' },
+    { icon: <Phone className="w-4 h-4" />, text: '+254 723 942 143' },
+    { icon: <MessageCircle className="w-4 h-4" />, text: '+254 734 007 656' },
+    { icon: <Mail className="w-4 h-4" />, text: 'nyangejorris@gmail.com' },
   ];
 
   const socialLinks = [
-    { icon: <Linkedin className="w-5 h-5" />, href: '#', label: 'LinkedIn', color: 'hover:text-blue-400' },
-    { icon: <Github className="w-5 h-5" />, href: '#', label: 'GitHub', color: 'hover:text-gray-300' },
+    { icon: <Linkedin className="w-5 h-5" />, href: 'https://linkedin.com/in/jorris-nyange', label: 'LinkedIn', color: 'hover:text-blue-400' },
+    { icon: <Github className="w-5 h-5" />, href: 'https://github.com/Jorris-N', label: 'GitHub', color: 'hover:text-gray-300' },
     { icon: <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="currentColor" d="M12.186 8.672 18.743.947h-2.927l-5.005 5.9-4.44-5.9H0l7.434 9.876-6.986 8.23h2.927l5.434-6.4 4.82 6.4H20L12.186 8.672Zm-2.267 2.671L8.544 9.515 3.2 2.42h2.2l4.312 5.719 1.375 1.828 5.731 7.613h-2.2l-4.699-6.237Z"></path></svg>, href: '#', label: 'Twitter', color: 'hover:text-blue-400' },
-    { icon: <Mail className="w-5 h-5" />, href: 'mailto:hello@johndeveloper.com', label: 'Email', color: 'hover:text-red-400' },
+    { icon: <Mail className="w-5 h-5" />, href: 'mailto:nyangejorris@gmail.com', label: 'Email', color: 'hover:text-red-400' },
   ];
 
   return (

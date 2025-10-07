@@ -7,32 +7,32 @@ import { Code2, Briefcase, GraduationCap, Award, ExternalLink, Download } from "
 
 export const AboutSection = () => {
   const skills = [
-    { name: "React", level: "Expert", years: "5+" },
-    { name: "TypeScript", level: "Expert", years: "4+" },
-    { name: "Next.js", level: "Advanced", years: "3+" },
-    { name: "Node.js", level: "Advanced", years: "4+" },
-    { name: "Python", level: "Intermediate", years: "2+" },
+    { name: "Next.js", level: "Expert", years: "4+" },
+    { name: "React", level: "Advanced", years: "4+" },
+    { name: "TypeScript", level: "Advanced", years: "3+" },
+    { name: "JavaScript", level: "Expert", years: "4+" },
+    { name: "Tailwind", level: "Expert", years: "4+" },
     { name: "AWS", level: "Intermediate", years: "2+" },
   ];
 
   const achievements = [
     {
       icon: <Award className="h-5 w-5" />,
-      title: "AWS Certified Developer",
-      description: "Associate level certification in cloud development",
-      year: "2023"
+      title: "Certified Web Developer",
+      description: "CipherByte Technologies",
+      year: "2024"
     },
     {
       icon: <Code2 className="h-5 w-5" />,
-      title: "Open Source Contributor",
-      description: "Contributed to 15+ popular React libraries",
-      year: "2020-2024"
+      title: "Git Training",
+      description: "SimpleLearn",
+      year: "2022"
     },
     {
       icon: <Briefcase className="h-5 w-5" />,
-      title: "Tech Lead Experience",
-      description: "Led development teams of 5-8 developers",
-      year: "2022-2024"
+      title: "Frontend Lead Experience",
+      description: "Led development of several websites",
+      year: "2022-2025"
     }
   ];
 
@@ -64,7 +64,7 @@ export const AboutSection = () => {
                 
                 <div className="space-y-6">
                   <p className="text-muted-foreground leading-relaxed">
-                    With over <span className="text-primary font-medium">5 years of experience</span> in frontend development, 
+                    With over <span className="text-primary font-medium">4 years of experience</span> in frontend development, 
                     I've had the privilege of working with innovative startups and established enterprises, helping them 
                     transform ideas into scalable digital solutions.
                   </p>
@@ -83,7 +83,7 @@ export const AboutSection = () => {
                   </div>
 
                   <div className="flex gap-3 pt-4">
-                    <Button variant="outline" size="sm" className="group">
+                    <Button variant="outline" href="/Jorris_Nyange_CV.pdf" target="_blank" size="sm" className="group">
                       <Download className="mr-2 h-4 w-4" />
                       Full Resume
                       <ExternalLink className="ml-2 h-3 w-3" />
@@ -125,8 +125,10 @@ export const AboutSection = () => {
                 </CardContent>
               </Card>
             </AnimatedElement>
-
-            <AnimatedElement delay={0.6}>
+          </div>
+        </div>
+        <div>
+            <AnimatedElement delay={0.6} className="py-16">
               <Card className="bg-card border-border shadow-card">
                 <CardContent className="p-8">
                   <div className="flex items-center gap-3 mb-6">
@@ -155,7 +157,6 @@ export const AboutSection = () => {
                 </CardContent>
               </Card>
             </AnimatedElement>
-          </div>
         </div>
       </div>
     </section>

@@ -47,10 +47,10 @@ export const ProfessionalContact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      value: "hello@jorris.dev",
+      value: "nyangejorris@gmail.com",
       description: "Professional inquiries & project discussions",
       action: "Send Email",
-      href: "mailto:hello@jorris.dev",
+      href: "mailto:nyangejorris@gmail.com",
       primary: true
     },
     {
@@ -65,19 +65,19 @@ export const ProfessionalContact = () => {
     {
       icon: <MessageSquare className="w-6 h-6" />,
       title: "WhatsApp",
-      value: "+27 (083) 123-4567",
+      value: "+254 734 007 656",
       description: "Quick questions & urgent matters",
       action: "Message",
-      href: "https://wa.me/27831234567",
+      href: "https://wa.me/254734007656",
       primary: false
     },
     {
       icon: <Linkedin className="w-6 h-6" />,
       title: "LinkedIn",
-      value: "@jorrisdev",
+      value: "@jorris",
       description: "Professional networking & opportunities",
       action: "Connect",
-      href: "https://linkedin.com/in/jorrisdev",
+      href: "https://linkedin.com/in/jorris-nyange",
       primary: false
     }
   ];
@@ -95,7 +95,7 @@ export const ProfessionalContact = () => {
     },
     {
       icon: <MapPin className="w-5 h-5 text-purple-400" />,
-      status: "Based in South Africa (GMT+2)",
+      status: "Based in Kenya (GMT+3)",
       color: "text-purple-400"
     }
   ];

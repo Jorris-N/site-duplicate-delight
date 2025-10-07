@@ -68,14 +68,14 @@ export const StatsSection = () => {
     },
     {
       icon: <Calendar />,
-      value: "3+",
+      value: "4+",
       label: "Years Experience",
       delay: 800,
     },
   ];
 
   return (
-    <section className="py-20 relative">
+    <section className="pb-16 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, index) => (

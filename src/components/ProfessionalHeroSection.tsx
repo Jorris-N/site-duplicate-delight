@@ -53,12 +53,12 @@ export const ProfessionalHeroSection = () => {
               </Badge>
               <Badge variant="outline" className="inline-flex items-center px-4 py-2">
                 <Users className="w-3 h-3 mr-2" />
-                3+ Years Experience
+                4+ Years Experience
               </Badge>
             </div>
 
             {/* Main Heading */}
-            <div className="text-4xl md:text-4xl lg:text-4xl font-heading font-bold mb-6 animate-fade-in-up space-y-4" style={{ animationDelay: "0.2s" }}>
+            <div className="text-3xl md:text-3xl lg:text-3xl font-heading font-bold mb-6 animate-fade-in-up space-y-4" style={{ animationDelay: "0.2s" }}>
               <h1 className="text-foreground"> &#x1f44b; I'm Jorris</h1>
               <h1 className="bg-gradient-hero bg-clip-text text-transparent bg-[length:200%_200%] animate-gradient-shift">
                 {typewriterText}<span className="animate-pulse">|</span>
@@ -66,7 +66,7 @@ export const ProfessionalHeroSection = () => {
             </div>
 
             {/* Professional Value Proposition */}
-            <p className="text-base md:text-base text-muted-foreground max-w-2xl lg:max-w-none mb-6 leading-relaxed animate-fade-in-up font-sans" style={{ animationDelay: "0.4s" }}>
+            <p className="text-sm md:text-base text-muted-foreground max-w-2xl lg:max-w-none mb-6 leading-relaxed animate-fade-in-up font-sans" style={{ animationDelay: "0.4s" }}>
               I specialize in building <span className="text-primary font-medium">scalable web applications</span> using React, TypeScript, and modern frontend technologies. 
               Helping startups and enterprises deliver exceptional user experiences.
             </p>
@@ -93,7 +93,7 @@ export const ProfessionalHeroSection = () => {
                 View My Portfolio
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" size="lg" className="group font-medium">
+              <Button variant="outline" href="/Jorris_Nyange_CV.pdf" target="_blank" size="lg" className="group font-medium">
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
                 <ExternalLink className="ml-2 h-3 w-3" />
