@@ -114,11 +114,11 @@ export const SkillsSection = () => {
             Let's collaborate to bring your ideas to life with cutting-edge technology and exceptional design.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg" className="group">
+            <Button variant="hero" href="/hire-me" size="lg" className="group">
               💼 Hire Me Now
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="glass" size="lg">
+            <Button variant="glass" href="/contact" size="lg">
               Get In Touch
             </Button>
           </div>
