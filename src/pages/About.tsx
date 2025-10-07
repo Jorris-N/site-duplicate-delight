@@ -6,24 +6,24 @@ import { AnimatedElement } from "@/components/AnimatedElement";
 const About = () => {
   const timeline = [
     {
-      year: "2021-Present",
-      title: "Senior Frontend Developer", 
-      company: "Tech Innovation Corp",
-      description: "Leading frontend development for multiple web applications, mentoring junior developers, and implementing modern React patterns.",
+      year: "2022-Present",
+      title: "Frontend Developer", 
+      company: "Diaspora University Trust",
+      description: "Leading frontend development for multiple web applications, mentoring interns, and implementing modern React patterns.",
       icon: <Briefcase className="w-5 h-5" />,
     },
     {
-      year: "2019-2021",
-      title: "Frontend Developer",
-      company: "Digital Solutions Ltd",
-      description: "Developed responsive web applications using React, TypeScript, and modern CSS frameworks. Collaborated with design teams to implement pixel-perfect UIs.",
+      year: "2023-Current",
+      title: "Freelance Web Developer",
+      company: "Lukeman Airbnb, Homestays & Villas",
+      description: "Developed responsive web booking application using Next.js, TypeScript, and modern CSS frameworks. Collaborated with client to implement pixel-perfect UIs.",
       icon: <Code className="w-5 h-5" />,
     },
     {
-      year: "2018-2019",
+      year: "2022-2024",
       title: "Junior Web Developer",
-      company: "Startup Hub",
-      description: "Started my professional journey building websites and learning modern web technologies. Focused on JavaScript, HTML5, and CSS3.",
+      company: "Explore Galore Tours & Safaris",
+      description: "Started my professional journey by building a safari website and learning modern web technologies. Focused on Next.js. Tailwind CSS and CMS.",
       icon: <GraduationCap className="w-5 h-5" />,
     },
   ];
@@ -38,7 +38,7 @@ const About = () => {
   ];
 
   const interests = [
-    { icon: <Code className="w-6 h-6" />, title: "Open Source", description: "Contributing to open source projects" },
+    { icon: <Code className="w-6 h-6" />, title: "Responsive Design", description: "Creating websites that adapt with every screen" },
     { icon: <Heart className="w-6 h-6" />, title: "UI/UX Design", description: "Creating beautiful user experiences" },
     { icon: <MapPin className="w-6 h-6" />, title: "Travel", description: "Exploring new places and cultures" },
     { icon: <Calendar className="w-6 h-6" />, title: "Learning", description: "Continuous skill development" },
@@ -58,33 +58,37 @@ const About = () => {
                   About Me
                 </span>
               </h1>
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                I'm a passionate frontend developer with over 5 years of experience creating 
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                I'm a passionate frontend developer with over 4 years of experience creating 
                 beautiful, responsive web applications. I love turning complex problems into 
                 simple, beautiful designs that provide exceptional user experiences.
               </p>
               <div className="flex flex-wrap gap-4 mb-8">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <MapPin className="w-4 h-4" />
-                  <span>San Francisco, CA</span>
+                  <span>Mombasa, Kenya</span>
                 </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Calendar className="w-4 h-4" />
-                  <span>Available for freelance</span>
+                <div className="flex items-center gap-2 text-muted-foreground ">
+                  <Calendar className="w-4 h-4 text-green-400" />
+                  <span className="text-green-400">Available for freelance</span>
                 </div>
               </div>
-              <Button variant="hero" size="lg" className="group">
+              <Button variant="hero" href="/Jorris_Nyange_CV.pdf" target="_blank" size="lg" className="group">
                 <Download className="mr-2 w-4 h-4" />
                 Download Resume
               </Button>
             </AnimatedElement>
             <AnimatedElement animation="fade-in-up" delay={200}>
               <div className="bg-gradient-card border border-border rounded-3xl p-8 text-center">
-                <div className="w-48 h-48 mx-auto mb-6 bg-gradient-primary rounded-full flex items-center justify-center">
-                  <div className="text-6xl">👨‍💻</div>
+                <div className="w-64 h-64 mx-auto mb-6 bg-gradient-primary rounded-full overflow-hidden">
+                  <img 
+                    src="/images/Jorris2.png" 
+                    className="w-full h-full object-cover" 
+                    alt="Jorris Profile"
+                  />
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Jorris</h3>
-                <p className="text-muted-foreground">Frontend Developer & UI/UX Enthusiast</p>
+                <p className="text-muted-foreground">Frontend Developer & Responsive Design Enthusiast</p>
               </div>
             </AnimatedElement>
           </div>
@@ -198,7 +202,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-6 bg-gradient-card border-t border-border">
+      <section className="py-16 mb-16 px-6 bg-gradient-card border-t border-border">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedElement animation="fade-in-up">
             <h2 className="text-3xl font-bold mb-4">Let's Work Together</h2>
@@ -206,10 +210,10 @@ const About = () => {
               I'm always open to discussing new opportunities and interesting projects.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg">
+              <Button variant="hero" href="/contact" size="lg">
                 Get In Touch
               </Button>
-              <Button variant="glass" size="lg">
+              <Button variant="glass" href="/portfolio" size="lg">
                 View My Work
               </Button>
             </div>
