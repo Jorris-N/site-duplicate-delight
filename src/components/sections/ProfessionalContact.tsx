@@ -131,7 +131,7 @@ export const ProfessionalContact = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="pt-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <AnimatedElement>
           <div className="text-center py-16">
