@@ -1,8 +1,12 @@
 import { Navigation } from "@/components/Navigation";
 import { AnimatedElement } from "@/components/AnimatedElement";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Search, Calendar, Clock, Tag, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+import { getAllArticles, getFeaturedArticles, calculateReadingTime, getPreviewText } from "@/lib/contentful";
 
 const Articles = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -10,74 +14,63 @@ const Articles = () => {
 
   const categories = ["All", "React", "JavaScript", "TypeScript", "CSS", "Performance"];
 
-  const articles = [
-    {
-      id: 1,
-      title: "Building Modern React Applications with TypeScript",
-      excerpt: "Learn how to leverage TypeScript's powerful type system to build more robust and maintainable React applications.",
-      category: "React",
-      readTime: "8 min read",
-      date: "Dec 15, 2024",
+  // Fetch all articles from Contentful
+  const { data: contentfulArticles, isLoading } = useQuery({
+    queryKey: ['articles'],
+    queryFn: getAllArticles,
+  });
+
+  // Fetch featured articles
+  const { data: contentfulFeatured } = useQuery({
+    queryKey: ['featured-articles'],
+    queryFn: getFeaturedArticles,
+  });
+
+  // Transform Contentful data to display format
+  const articles = contentfulArticles?.map(article => {
+    const imageUrl = article.fields.image?.fields?.file?.url 
+      ? `https:${article.fields.image.fields.file.url}`
+      : '';
+    
+    return {
+      id: article.sys.id,
+      title: article.fields.title,
+      excerpt: getPreviewText(article.fields.excerpt),
+      slug: article.fields.slug,
+      image: imageUrl,
+      date: new Date(article.sys.createdAt).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      }),
+      readTime: calculateReadingTime(article.fields.excerpt),
+      featured: article.fields.featured || false,
+      tags: [], // Can add tags later
+      category: "All", // Can add category later
+    };
+  }) || [];
+
+  const featuredArticles = contentfulFeatured?.map(article => {
+    const imageUrl = article.fields.image?.fields?.file?.url 
+      ? `https:${article.fields.image.fields.file.url}`
+      : '';
+    
+    return {
+      id: article.sys.id,
+      title: article.fields.title,
+      excerpt: getPreviewText(article.fields.excerpt),
+      slug: article.fields.slug,
+      image: imageUrl,
+      date: new Date(article.sys.createdAt).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      }),
+      readTime: calculateReadingTime(article.fields.excerpt),
       featured: true,
-      image: "⚛️",
-      tags: ["React", "TypeScript", "Best Practices"],
-    },
-    {
-      id: 2,
-      title: "Advanced CSS Grid Techniques for Modern Layouts",
-      excerpt: "Explore advanced CSS Grid features and techniques to create complex, responsive layouts with ease.",
-      category: "CSS",
-      readTime: "12 min read",
-      date: "Dec 10, 2024",
-      featured: true,
-      image: "🎨",
-      tags: ["CSS", "Grid", "Responsive Design"],
-    },
-    {
-      id: 3,
-      title: "Optimizing React Performance: Best Practices",
-      excerpt: "Discover proven techniques to optimize React application performance and improve user experience.",
-      category: "Performance",
-      readTime: "15 min read",
-      date: "Dec 5, 2024",
-      featured: false,
-      image: "⚡",
-      tags: ["React", "Performance", "Optimization"],
-    },
-    {
-      id: 4,
-      title: "Understanding JavaScript Closures and Scope",
-      excerpt: "Deep dive into JavaScript closures, lexical scope, and how they affect your code execution.",
-      category: "JavaScript",
-      readTime: "10 min read",
-      date: "Nov 28, 2024",
-      featured: false,
-      image: "🔍",
-      tags: ["JavaScript", "Fundamentals", "Closures"],
-    },
-    {
-      id: 5,
-      title: "TypeScript Utility Types: A Complete Guide",
-      excerpt: "Master TypeScript's built-in utility types and learn how to create your own custom types.",
-      category: "TypeScript",
-      readTime: "14 min read",
-      date: "Nov 22, 2024",
-      featured: true,
-      image: "📝",
-      tags: ["TypeScript", "Types", "Utilities"],
-    },
-    {
-      id: 6,
-      title: "CSS Animation Techniques for Better UX",
-      excerpt: "Learn how to use CSS animations effectively to enhance user experience without overwhelming users.",
-      category: "CSS",
-      readTime: "9 min read",
-      date: "Nov 18, 2024",
-      featured: false,
-      image: "🎭",
-      tags: ["CSS", "Animation", "UX"],
-    },
-  ];
+      tags: [],
+    };
+  }) || [];
 
   const filteredArticles = articles.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -85,8 +78,6 @@ const Articles = () => {
     const matchesCategory = activeCategory === "All" || article.category === activeCategory;
     return matchesSearch && matchesCategory;
   });
-
-  const featuredArticles = articles.filter(article => article.featured);
 
   return (
     <div className="min-h-screen bg-background">
@@ -119,49 +110,68 @@ const Articles = () => {
               </span>
             </h2>
           </AnimatedElement>
-          <div className="grid lg:grid-cols-3 gap-8">
-            {featuredArticles.map((article, index) => (
-              <AnimatedElement 
-                key={article.id} 
-                animation="fade-in-up"
-                delay={index * 200}
-              >
-                <article className="bg-gradient-card border border-border rounded-2xl p-6 hover:shadow-glow hover:border-primary/50 transition-all duration-300 group">
-                  <div className="w-full h-48 bg-cover bg-center mb-6" style={{ backgroundImage: `url(${article.image})` }}></div>
-                  <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {article.date}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {article.readTime}
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                    {article.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    {article.excerpt}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {article.tags.map((tag, tagIndex) => (
-                      <span 
-                        key={tagIndex} 
-                        className="px-2 py-1 bg-primary/10 text-primary text-xs rounded"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Button variant="outline" className="w-full group">
-                    Read Article
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </article>
-              </AnimatedElement>
-            ))}
-          </div>
+          
+          {isLoading ? (
+            <div className="grid lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-gradient-card border border-border rounded-2xl p-6">
+                  <Skeleton className="w-full h-48 mb-6" />
+                  <Skeleton className="h-4 w-24 mb-4" />
+                  <Skeleton className="h-8 w-full mb-3" />
+                  <Skeleton className="h-20 w-full mb-4" />
+                  <Skeleton className="h-10 w-full" />
+                </div>
+              ))}
+            </div>
+          ) : featuredArticles.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">No featured articles yet.</p>
+            </div>
+          ) : (
+            <div className="grid lg:grid-cols-3 gap-8">
+              {featuredArticles.map((article, index) => (
+                <AnimatedElement 
+                  key={article.id} 
+                  animation="fade-in-up"
+                  delay={index * 200}
+                >
+                  <Link to={`/articles/${article.slug}`}>
+                    <article className="bg-gradient-card border border-border rounded-2xl p-6 hover:shadow-glow hover:border-primary/50 transition-all duration-300 group h-full flex flex-col">
+                      {article.image && (
+                        <div className="w-full h-48 rounded-lg overflow-hidden mb-6">
+                          <img 
+                            src={article.image} 
+                            alt={article.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+                      <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {article.date}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {article.readTime}
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-4 leading-relaxed flex-1">
+                        {article.excerpt}
+                      </p>
+                      <Button variant="outline" className="w-full group mt-auto">
+                        Read Article
+                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </article>
+                  </Link>
+                </AnimatedElement>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -210,7 +220,19 @@ const Articles = () => {
             </h2>
           </AnimatedElement>
           
-          {filteredArticles.length === 0 ? (
+          {isLoading ? (
+            <div className="grid md:grid-cols-2 gap-6">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="bg-gradient-card border border-border rounded-xl p-6">
+                  <Skeleton className="w-full h-48 mb-6" />
+                  <Skeleton className="h-4 w-24 mb-2" />
+                  <Skeleton className="h-6 w-full mb-2" />
+                  <Skeleton className="h-16 w-full mb-4" />
+                  <Skeleton className="h-8 w-24" />
+                </div>
+              ))}
+            </div>
+          ) : filteredArticles.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-muted-foreground text-lg">No articles found matching your criteria.</p>
             </div>
@@ -222,41 +244,41 @@ const Articles = () => {
                   animation="fade-in-up"
                   delay={index * 100}
                 >
-                  <article className="bg-gradient-card border border-border rounded-xl p-6 hover:shadow-card hover:border-primary/50 transition-all duration-300 group flex flex-col h-full">
-                    <div className="w-full h-48 bg-cover bg-center mb-6" style={{ backgroundImage: `url(${article.image})` }}></div>
-                    <div className="flex-1 flex flex-col">
-                      <div className="flex items-center gap-4 mb-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {article.date}
+                  <Link to={`/articles/${article.slug}`}>
+                    <article className="bg-gradient-card border border-border rounded-xl p-6 hover:shadow-card hover:border-primary/50 transition-all duration-300 group flex flex-col h-full">
+                      {article.image && (
+                        <div className="w-full h-48 rounded-lg overflow-hidden mb-6">
+                          <img 
+                            src={article.image} 
+                            alt={article.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {article.readTime}
+                      )}
+                      <div className="flex-1 flex flex-col">
+                        <div className="flex items-center gap-4 mb-2 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            {article.date}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {article.readTime}
+                          </div>
                         </div>
+                        <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                          {article.title}
+                        </h3>
+                        <p className="text-muted-foreground text-sm mb-4 leading-relaxed flex-1">
+                          {article.excerpt}
+                        </p>
+                        <Button variant="ghost" size="sm" className="group mt-auto self-start">
+                          Read More
+                          <ArrowRight className="w-3 h-3 ml-1 transition-transform group-hover:translate-x-1" />
+                        </Button>
                       </div>
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                        {article.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                        {article.excerpt}
-                      </p>
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {article.tags.map((tag, tagIndex) => (
-                          <span 
-                            key={tagIndex} 
-                            className="px-2 py-1 bg-primary/10 text-primary text-xs rounded"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <Button variant="ghost" size="sm" className="group mt-auto">
-                        Read More
-                        <ArrowRight className="w-3 h-3 ml-1 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </div>
-                  </article>
+                    </article>
+                  </Link>
                 </AnimatedElement>
               ))}
             </div>
