@@ -2,17 +2,18 @@ import { Navigation } from "@/components/Navigation";
 import { AnimatedElement } from "@/components/AnimatedElement";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, PaginationEllipsis } from "@/components/ui/pagination";
 import { Search, Calendar, Clock, Tag, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { getAllArticles, getFeaturedArticles, calculateReadingTime, getPreviewText } from "@/lib/contentful";
+import { getAllArticles, calculateReadingTime, getPreviewText } from "@/lib/contentful";
 
 const Articles = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const categories = ["All", "React", "JavaScript", "TypeScript", "CSS", "Performance"];
+  const [activeTag, setActiveTag] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 6;
 
   // Fetch all articles from Contentful
   const { data: contentfulArticles, isLoading } = useQuery({
@@ -20,64 +21,68 @@ const Articles = () => {
     queryFn: getAllArticles,
   });
 
-  // Fetch featured articles
-  const { data: contentfulFeatured } = useQuery({
-    queryKey: ['featured-articles'],
-    queryFn: getFeaturedArticles,
-  });
-
   // Transform Contentful data to display format
-  const articles = contentfulArticles?.map(article => {
-    const imageUrl = article.fields.image?.fields?.file?.url 
-      ? `https:${article.fields.image.fields.file.url}`
-      : '';
-    
-    return {
-      id: article.sys.id,
-      title: article.fields.title,
-      excerpt: getPreviewText(article.fields.excerpt),
-      slug: article.fields.slug,
-      image: imageUrl,
-      date: new Date(article.sys.createdAt).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      }),
-      readTime: calculateReadingTime(article.fields.excerpt),
-      featured: article.fields.featured || false,
-      tags: [], // Can add tags later
-      category: "All", // Can add category later
-    };
-  }) || [];
+  const articles = useMemo(() => {
+    return contentfulArticles?.map(article => {
+      const imageUrl = article.fields.image?.fields?.file?.url 
+        ? `https:${article.fields.image.fields.file.url}`
+        : '';
+      
+      return {
+        id: article.sys.id,
+        title: article.fields.title,
+        excerpt: getPreviewText(article.fields.excerpt),
+        slug: article.fields.slug,
+        image: imageUrl,
+        date: new Date(article.sys.createdAt).toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }),
+        readTime: calculateReadingTime(article.fields.excerpt),
+        tags: article.fields.tags || [],
+      };
+    }) || [];
+  }, [contentfulArticles]);
 
-  const featuredArticles = contentfulFeatured?.map(article => {
-    const imageUrl = article.fields.image?.fields?.file?.url 
-      ? `https:${article.fields.image.fields.file.url}`
-      : '';
-    
-    return {
-      id: article.sys.id,
-      title: article.fields.title,
-      excerpt: getPreviewText(article.fields.excerpt),
-      slug: article.fields.slug,
-      image: imageUrl,
-      date: new Date(article.sys.createdAt).toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      }),
-      readTime: calculateReadingTime(article.fields.excerpt),
-      featured: true,
-      tags: [],
-    };
-  }) || [];
+  // Featured articles - 3 most recent
+  const featuredArticles = useMemo(() => {
+    return articles.slice(0, 3);
+  }, [articles]);
 
-  const filteredArticles = articles.filter(article => {
-    const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeCategory === "All" || article.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+  // All available tags from articles
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    articles.forEach(article => {
+      article.tags?.forEach(tag => tags.add(tag));
+    });
+    return ["All", ...Array.from(tags)];
+  }, [articles]);
+
+  // Articles for "All Articles" section - exclude the 3 most recent (featured)
+  const nonFeaturedArticles = useMemo(() => {
+    return articles.slice(3);
+  }, [articles]);
+
+  // Filter articles based on search and tags
+  const filteredArticles = useMemo(() => {
+    return nonFeaturedArticles.filter(article => {
+      const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesTag = activeTag === "All" || article.tags?.includes(activeTag);
+      return matchesSearch && matchesTag;
+    });
+  }, [nonFeaturedArticles, searchTerm, activeTag]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+  const startIndex = (currentPage - 1) * articlesPerPage;
+  const paginatedArticles = filteredArticles.slice(startIndex, startIndex + articlesPerPage);
+
+  // Reset to page 1 when filters change
+  useMemo(() => {
+    setCurrentPage(1);
+  }, [searchTerm, activeTag]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -191,16 +196,16 @@ const Articles = () => {
                 />
               </div>
               <div className="flex flex-wrap gap-2">
-                {categories.map((category) => (
+                {allTags.map((tag) => (
                   <Button
-                    key={category}
-                    variant={activeCategory === category ? "hero" : "outline"}
+                    key={tag}
+                    variant={activeTag === tag ? "hero" : "outline"}
                     size="sm"
-                    onClick={() => setActiveCategory(category)}
+                    onClick={() => setActiveTag(tag)}
                     className="transition-all duration-300"
                   >
                     <Tag className="w-3 h-3 mr-1" />
-                    {category}
+                    {tag}
                   </Button>
                 ))}
               </div>
@@ -237,8 +242,9 @@ const Articles = () => {
               <p className="text-muted-foreground text-lg">No articles found matching your criteria.</p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-6">
-              {filteredArticles.map((article, index) => (
+            <>
+              <div className="grid md:grid-cols-2 gap-6">
+                {paginatedArticles.map((article, index) => (
                 <AnimatedElement 
                   key={article.id} 
                   animation="fade-in-up"
@@ -281,7 +287,61 @@ const Articles = () => {
                   </Link>
                 </AnimatedElement>
               ))}
-            </div>
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <AnimatedElement animation="fade-in-up" delay={100}>
+                  <div className="mt-12 flex justify-center">
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious 
+                            onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                            className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                          />
+                        </PaginationItem>
+                        
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                          // Show first page, last page, current page, and pages around current
+                          if (
+                            page === 1 ||
+                            page === totalPages ||
+                            (page >= currentPage - 1 && page <= currentPage + 1)
+                          ) {
+                            return (
+                              <PaginationItem key={page}>
+                                <PaginationLink
+                                  onClick={() => setCurrentPage(page)}
+                                  isActive={currentPage === page}
+                                  className="cursor-pointer"
+                                >
+                                  {page}
+                                </PaginationLink>
+                              </PaginationItem>
+                            );
+                          } else if (page === currentPage - 2 || page === currentPage + 2) {
+                            return (
+                              <PaginationItem key={page}>
+                                <PaginationEllipsis />
+                              </PaginationItem>
+                            );
+                          }
+                          return null;
+                        })}
+
+                        <PaginationItem>
+                          <PaginationNext 
+                            onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                            className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </div>
+                </AnimatedElement>
+              )}
+            </>
           )}
         </div>
       </section>

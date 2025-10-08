@@ -31,6 +31,7 @@ export interface TechBlogPost {
       };
     };
     featured?: boolean;
+    tags?: string[];
   };
 }
 
