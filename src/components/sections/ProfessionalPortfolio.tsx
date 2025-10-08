@@ -118,10 +118,10 @@ export const ProfessionalPortfolio = () => {
   const featuredProjects = projects.filter(project => project.featured);
 
   return (
-    <section className="py-20 bg-background">
+    <section className="pt-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <AnimatedElement>
-          <div className="text-center mb-16">
+          <div className="text-center py-16">
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
               My <span className="bg-gradient-primary bg-clip-text text-transparent">Portfolio</span>
             </h1>

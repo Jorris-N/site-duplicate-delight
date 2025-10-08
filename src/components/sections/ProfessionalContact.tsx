@@ -16,7 +16,8 @@ import {
   CheckCircle,
   Star,
   MessageSquare,
-  ExternalLink
+  ExternalLink,
+  Loader2
 } from "lucide-react";
 
 export const ProfessionalContact = () => {
@@ -29,11 +30,22 @@ export const ProfessionalContact = () => {
     message: "",
     projectType: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Professional inquiry submitted:", formData);
+    console.log('Form submitted:', formData);
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      budget: "",
+      timeline: "",
+      message: "",
+      projectType: ""
+    });
+    setIsSubmitting(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -119,10 +131,10 @@ export const ProfessionalContact = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="pt-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <AnimatedElement>
-          <div className="text-center mb-16">
+          <div className="text-center py-16">
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
               Let's Build Something <span className="bg-gradient-primary bg-clip-text text-transparent">Amazing Together</span>
             </h1>
@@ -132,91 +144,46 @@ export const ProfessionalContact = () => {
           </div>
         </AnimatedElement>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Methods */}
-          <div className="space-y-8">
-            <AnimatedElement delay={0.2}>
-              <div>
-                <h2 className="text-2xl font-heading font-semibold mb-6">
-                  Get In Touch
-                </h2>
-                <div className="space-y-4">
-                  {contactMethods.map((method, index) => (
-                    <Card key={index} className={`bg-card border-border shadow-card hover:shadow-glow transition-all duration-500 ${method.primary ? 'border-primary/50' : ''}`}>
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-4">
-                            <div className={`p-3 rounded-lg ${method.primary ? 'bg-primary/10' : 'bg-muted'}`}>
-                              <div className={method.primary ? 'text-primary' : 'text-muted-foreground'}>
-                                {method.icon}
-                              </div>
-                            </div>
-                            <div>
-                              <h3 className="font-semibold">{method.title}</h3>
-                              <p className="text-foreground font-medium">{method.value}</p>
-                              <p className="text-sm text-muted-foreground">{method.description}</p>
-                            </div>
-                          </div>
-                          <Button 
-                            variant={method.primary ? "default" : "outline"} 
-                            size="sm"
-                            className="group"
-                            asChild
-                          >
-                            <a href={method.href} target="_blank" rel="noopener noreferrer">
-                              {method.action}
-                              <ExternalLink className="ml-2 h-3 w-3" />
-                            </a>
-                          </Button>
+                {/* Contact Methods in a single row */}
+        <AnimatedElement delay={0.4}>
+          <div className="py-16">
+            <h2 className="text-2xl font-heading text-center font-semibold mb-6">
+              Get In Touch
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              {contactMethods.map((method, index) => (
+                <Card key={index} className={`bg-card border-border shadow-card hover:shadow-glow transition-all duration-300 ${method.primary ? 'border-primary/50' : ''}`}>
+                  <CardContent className="p-4">
+                    <div className="flex flex-col items-center text-center">
+                      <div className={`p-2 rounded-lg mb-2 ${method.primary ? 'bg-primary/10' : 'bg-muted'}`}>
+                        <div className={method.primary ? 'text-primary' : 'text-muted-foreground'}>
+                          {method.icon}
                         </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            </AnimatedElement>
-
-            <AnimatedElement delay={0.4}>
-              <Card className="bg-gradient-card border-border shadow-card">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                      <Coffee className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-heading font-semibold">Current Availability</h3>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    {availability.map((item, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        {item.icon}
-                        <span className="text-sm">{item.status}</span>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 pt-6 border-t border-border/50">
-                    <p className="text-sm text-muted-foreground mb-4">
-                      I typically work with clients worldwide and am comfortable with different time zones and remote collaboration.
-                    </p>
-                    <div className="flex gap-4">
-                      <Button variant="outline" size="sm" className="flex-1">
-                        <Calendar className="mr-2 h-4 w-4" />
-                        Schedule Call
-                      </Button>
-                      <Button variant="ghost" size="sm" className="flex-1">
-                        <Star className="mr-2 h-4 w-4" />
-                        View Testimonials
+                      <h3 className="font-semibold text-sm">{method.title}</h3>
+                      <p className="text-foreground font-medium text-sm">{method.value}</p>
+                      <Button 
+                        variant={method.primary ? "default" : "outline"} 
+                        size="sm"
+                        className="group mt-2 w-full"
+                        asChild
+                      >
+                        <a href={method.href} target="_blank" rel="noopener noreferrer">
+                          {method.action}
+                          <ExternalLink className="ml-1 h-3 w-3" />
+                        </a>
                       </Button>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </AnimatedElement>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
+        </AnimatedElement>
 
+        <div className="flex flex-col gap-12">
           {/* Professional Contact Form */}
-          <AnimatedElement delay={0.6}>
+          <AnimatedElement delay={0.2}>
             <Card className="bg-card border-border shadow-card">
               <CardContent className="p-8">
                 <h2 className="text-2xl font-heading font-semibold mb-6">
@@ -342,10 +309,24 @@ export const ProfessionalContact = () => {
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full group font-medium">
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Project Inquiry
-                    <ExternalLink className="ml-2 h-3 w-3 transition-transform group-hover:translate-x-1" />
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full group font-medium" 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Project Inquiry
+                        <ExternalLink className="ml-2 h-3 w-3 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center">
@@ -356,6 +337,42 @@ export const ProfessionalContact = () => {
             </Card>
           </AnimatedElement>
         </div>
+
+        {/* Availability Section */}
+        <AnimatedElement delay={0.6} className="py-16 max-w-lg mx-auto">
+          <Card className="bg-gradient-card border-border shadow-card">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-3 mb-4 justify-center pb-4">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <Coffee className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-lg font-heading font-semibold">Current Availability</h3>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3">
+                {availability.map((item, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    {item.icon}
+                    <span className="text-sm">{item.status}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-border/50">
+                <div className="flex gap-3">
+                  <Button variant="outline" size="sm" className="flex-1">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Schedule Call
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex-1">
+                    <Star className="mr-2 h-4 w-4" />
+                    Testimonials
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </AnimatedElement>
 
         {/* FAQ Section */}
         <AnimatedElement delay={0.8}>

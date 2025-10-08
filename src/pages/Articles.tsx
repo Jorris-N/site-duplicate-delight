@@ -89,8 +89,8 @@ const Articles = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-6">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="pt-24 px-6">
+        <div className="max-w-7xl mx-auto text-center py-16">
           <AnimatedElement animation="fade-in-up">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-primary bg-clip-text text-transparent">

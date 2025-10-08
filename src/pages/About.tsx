@@ -53,12 +53,12 @@ const About = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedElement animation="fade-in-up">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              <h1 className="text-5xl md:text-5xl font-bold mb-6">
                 <span className="bg-gradient-primary bg-clip-text text-transparent">
                   About Me
                 </span>
               </h1>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-base text-muted-foreground mb-8 leading-relaxed">
                 I'm a passionate frontend developer with over 4 years of experience creating 
                 beautiful, responsive web applications. I love turning complex problems into 
                 simple, beautiful designs that provide exceptional user experiences.
