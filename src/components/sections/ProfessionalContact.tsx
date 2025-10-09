@@ -3,6 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedElement } from "@/components/AnimatedElement";
+import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
+import { z } from "zod";
 import { 
   Mail, 
   Phone, 
@@ -20,7 +23,18 @@ import {
   Loader2
 } from "lucide-react";
 
+const contactFormSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  company: z.string().trim().max(100, "Company name must be less than 100 characters").optional(),
+  projectType: z.string().min(1, "Please select a project type"),
+  budget: z.string().optional(),
+  timeline: z.string().trim().max(100, "Timeline must be less than 100 characters").optional(),
+  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message must be less than 2000 characters")
+});
+
 export const ProfessionalContact = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,21 +45,81 @@ export const ProfessionalContact = () => {
     projectType: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      budget: "",
-      timeline: "",
-      message: "",
-      projectType: ""
-    });
-    setIsSubmitting(false);
+    setIsSubmitting(true);
+    setFormErrors({});
+
+    try {
+      // Validate form data
+      const validatedData = contactFormSchema.parse(formData);
+
+      // Prepare template parameters for EmailJS
+      const templateParams = {
+        from_name: validatedData.name,
+        from_email: validatedData.email,
+        company: validatedData.company || "Not specified",
+        project_type: validatedData.projectType,
+        budget: validatedData.budget || "Not specified",
+        timeline: validatedData.timeline || "Not specified",
+        message: validatedData.message,
+        to_email: "nyangejorris@gmail.com"
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      // Success toast
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll respond within 2-4 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        budget: "",
+        timeline: "",
+        message: "",
+        projectType: ""
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        // Handle validation errors
+        const errors: Record<string, string> = {};
+        error.errors.forEach((err) => {
+          if (err.path[0]) {
+            errors[err.path[0].toString()] = err.message;
+          }
+        });
+        setFormErrors(errors);
+        
+        toast({
+          title: "Validation Error",
+          description: "Please check the form fields and try again.",
+          variant: "destructive",
+        });
+      } else {
+        // Handle EmailJS errors
+        console.error("EmailJS error:", error);
+        toast({
+          title: "Failed to send message",
+          description: "Please try again or contact me directly via email.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -202,10 +276,16 @@ export const ProfessionalContact = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        disabled={isSubmitting}
                         required
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+                        className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 ${
+                          formErrors.name ? 'border-red-500' : 'border-border'
+                        }`}
                         placeholder="John Smith"
                       />
+                      {formErrors.name && (
+                        <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium mb-2">
@@ -217,10 +297,16 @@ export const ProfessionalContact = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        disabled={isSubmitting}
                         required
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+                        className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 ${
+                          formErrors.email ? 'border-red-500' : 'border-border'
+                        }`}
                         placeholder="john@company.com"
                       />
+                      {formErrors.email && (
+                        <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
+                      )}
                     </div>
                   </div>
 
@@ -235,9 +321,15 @@ export const ProfessionalContact = () => {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+                        disabled={isSubmitting}
+                        className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 ${
+                          formErrors.company ? 'border-red-500' : 'border-border'
+                        }`}
                         placeholder="Acme Corp"
                       />
+                      {formErrors.company && (
+                        <p className="text-red-500 text-xs mt-1">{formErrors.company}</p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="timeline" className="block text-sm font-medium mb-2">
@@ -249,9 +341,15 @@ export const ProfessionalContact = () => {
                         name="timeline"
                         value={formData.timeline}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+                        disabled={isSubmitting}
+                        className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 ${
+                          formErrors.timeline ? 'border-red-500' : 'border-border'
+                        }`}
                         placeholder="3-6 months"
                       />
+                      {formErrors.timeline && (
+                        <p className="text-red-500 text-xs mt-1">{formErrors.timeline}</p>
+                      )}
                     </div>
                   </div>
 
@@ -265,14 +363,20 @@ export const ProfessionalContact = () => {
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleChange}
+                        disabled={isSubmitting}
                         required
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+                        className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 ${
+                          formErrors.projectType ? 'border-red-500' : 'border-border'
+                        }`}
                       >
                         <option value="">Select project type</option>
                         {projectTypes.map((type) => (
                           <option key={type} value={type}>{type}</option>
                         ))}
                       </select>
+                      {formErrors.projectType && (
+                        <p className="text-red-500 text-xs mt-1">{formErrors.projectType}</p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="budget" className="block text-sm font-medium mb-2">
@@ -283,13 +387,19 @@ export const ProfessionalContact = () => {
                         name="budget"
                         value={formData.budget}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
+                        disabled={isSubmitting}
+                        className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 ${
+                          formErrors.budget ? 'border-red-500' : 'border-border'
+                        }`}
                       >
                         <option value="">Select budget range</option>
                         {budgetRanges.map((range) => (
                           <option key={range} value={range}>{range}</option>
                         ))}
                       </select>
+                      {formErrors.budget && (
+                        <p className="text-red-500 text-xs mt-1">{formErrors.budget}</p>
+                      )}
                     </div>
                   </div>
 
@@ -302,11 +412,17 @@ export const ProfessionalContact = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
+                      disabled={isSubmitting}
                       required
                       rows={5}
-                      className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 resize-none"
+                      className={`w-full px-4 py-3 bg-background border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300 resize-none ${
+                        formErrors.message ? 'border-red-500' : 'border-border'
+                      }`}
                       placeholder="Tell me about your project goals, target audience, key features, and any specific requirements..."
                     />
+                    {formErrors.message && (
+                      <p className="text-red-500 text-xs mt-1">{formErrors.message}</p>
+                    )}
                   </div>
 
                   <Button 
