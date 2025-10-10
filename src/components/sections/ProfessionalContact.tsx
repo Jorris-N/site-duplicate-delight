@@ -80,6 +80,7 @@ export const ProfessionalContact = () => {
       toast({
         title: "Message sent successfully!",
         description: "Thank you for reaching out. I'll respond within 2-4 hours.",
+        variant: "success",
       });
 
       // Reset form

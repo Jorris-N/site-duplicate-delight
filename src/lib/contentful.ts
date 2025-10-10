@@ -120,3 +120,104 @@ export const searchArticles = async (query: string): Promise<TechBlogPost[]> => 
     throw error;
   }
 };
+
+// TypeScript interface for portfolioListings content type
+export interface PortfolioProject {
+  sys: {
+    id: string;
+    createdAt: string;
+  };
+  fields: {
+    title: string;
+    slug: string;
+    description: string;
+    longDescription?: string;
+    image: {
+      fields: {
+        file: {
+          url: string;
+          details?: {
+            image?: {
+              width: number;
+              height: number;
+            };
+          };
+        };
+      };
+    };
+    links: {
+      live?: string;
+      github?: string;
+    };
+    category: 'fullstack' | 'frontend' | 'mobile' | 'backend';
+    technologies: string[];
+    year: string;
+    featured: boolean;
+    client?: string;
+  };
+}
+
+// Fetch all portfolio projects, sorted by year (newest first)
+export const getAllProjects = async (): Promise<PortfolioProject[]> => {
+  try {
+    const response = await client.getEntries({
+      content_type: 'portfolioListings',
+      order: ['-fields.year', '-sys.createdAt'],
+    });
+    return response.items as unknown as PortfolioProject[];
+  } catch (error) {
+    console.error('Error fetching portfolio projects:', error);
+    throw error;
+  }
+};
+
+// Fetch featured projects only
+export const getFeaturedProjects = async (): Promise<PortfolioProject[]> => {
+  try {
+    const response = await client.getEntries({
+      content_type: 'portfolioListings',
+      'fields.featured': true,
+      order: ['-fields.year'],
+      limit: 6,
+    });
+    return response.items as unknown as PortfolioProject[];
+  } catch (error) {
+    console.error('Error fetching featured projects:', error);
+    throw error;
+  }
+};
+
+// Fetch projects by category
+export const getProjectsByCategory = async (category: string): Promise<PortfolioProject[]> => {
+  try {
+    const response = await client.getEntries({
+      content_type: 'portfolioListings',
+      'fields.category': category,
+      order: ['-fields.year'],
+    });
+    return response.items as unknown as PortfolioProject[];
+  } catch (error) {
+    console.error('Error fetching projects by category:', error);
+    throw error;
+  }
+};
+
+// Fetch single project by slug (for future detail page)
+export const getProjectBySlug = async (slug: string): Promise<PortfolioProject | null> => {
+  try {
+    const response = await client.getEntries({
+      content_type: 'portfolioListings',
+      'fields.slug': slug,
+      limit: 1,
+    });
+    
+    if (response.items.length === 0) {
+      return null;
+    }
+    
+    return response.items[0] as unknown as PortfolioProject;
+  } catch (error) {
+    console.error('Error fetching project by slug:', error);
+    throw error;
+  }
+};
