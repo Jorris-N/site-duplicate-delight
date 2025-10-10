@@ -142,10 +142,7 @@ export interface PortfolioProject {
         };
       };
     };
-    links: {
-      live?: string;
-      github?: string;
-    };
+    links: string; // Updated to a string field instead of an object
   };
 }
 

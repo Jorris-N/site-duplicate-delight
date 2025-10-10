@@ -12,7 +12,7 @@ import {
   PaginationPrevious 
 } from "@/components/ui/pagination";
 import { AnimatedElement } from "@/components/AnimatedElement";
-import { ExternalLink, Github, Filter, Star, TrendingUp, ArrowRight } from "lucide-react";
+import { ExternalLink, Star, TrendingUp, ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllProjects, getFeaturedProjects } from "@/lib/contentful";
 import { cn } from "@/lib/utils";
@@ -22,7 +22,6 @@ interface Project {
   title: string;
   image: string;
   liveUrl?: string;
-  githubUrl?: string;
 }
 
 export const ProfessionalPortfolio = () => {
@@ -50,8 +49,7 @@ export const ProfessionalPortfolio = () => {
     image: project.fields.image.fields.file.url.startsWith('//') 
       ? `https:${project.fields.image.fields.file.url}`
       : project.fields.image.fields.file.url,
-    liveUrl: project.fields.links?.live || '',
-    githubUrl: project.fields.links?.github,
+    liveUrl: project.fields.links,
   })) || [];
 
   // Transform Contentful data for featured projects
@@ -61,8 +59,7 @@ export const ProfessionalPortfolio = () => {
     image: project.fields.image.fields.file.url.startsWith('//') 
       ? `https:${project.fields.image.fields.file.url}`
       : project.fields.image.fields.file.url,
-    liveUrl: project.fields.links?.live || '',
-    githubUrl: project.fields.links?.github,
+    liveUrl: project.fields.links,
   })) || [];
 
   // Calculate pagination
@@ -133,21 +130,15 @@ export const ProfessionalPortfolio = () => {
                         </h3>
                         
                         <div className="flex gap-3">
-                          {project.liveUrl && (
+                          {project.liveUrl ? (
                             <Button size="sm" className="group" asChild>
                               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                                 <ExternalLink className="mr-2 h-4 w-4" />
                                 Live Demo
                               </a>
                             </Button>
-                          )}
-                          {project.githubUrl && (
-                            <Button variant="outline" size="sm" asChild>
-                              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                                <Github className="mr-2 h-4 w-4" />
-                                Code
-                              </a>
-                            </Button>
+                          ) : (
+                            <span className="text-muted">No live link available</span>
                           )}
                         </div>
                       </CardContent>
@@ -163,7 +154,7 @@ export const ProfessionalPortfolio = () => {
         <AnimatedElement delay={0.4}>
           <div className="flex items-center gap-3 mb-12">
             <div className="p-2 bg-primary/10 rounded-lg">
-              <Filter className="h-6 w-6 text-primary" />
+              <Star className="h-6 w-6 text-primary" />
             </div>
             <h2 className="text-2xl font-heading font-semibold">All Projects</h2>
           </div>
@@ -225,21 +216,15 @@ export const ProfessionalPortfolio = () => {
                     </h3>
                     
                     <div className="flex gap-3">
-                      {project.liveUrl && (
+                      {project.liveUrl ? (
                         <Button size="sm" variant="default" asChild>
                           <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="mr-2 h-4 w-4" />
                             Live Demo
                           </a>
                         </Button>
-                      )}
-                      {project.githubUrl && (
-                        <Button size="sm" variant="outline" asChild>
-                          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                            <Github className="mr-2 h-4 w-4" />
-                            Code
-                          </a>
-                        </Button>
+                      ) : (
+                        <span className="text-muted">No live link available</span>
                       )}
                     </div>
                   </CardContent>
