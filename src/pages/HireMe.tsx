@@ -3,7 +3,7 @@ import { AnimatedElement } from "@/components/AnimatedElement";
 import { Button } from "@/components/ui/button";
 import { 
   Code, 
-  Smartphone, 
+  ShoppingCart, 
   Globe, 
   Zap, 
   CheckCircle, 
@@ -24,7 +24,7 @@ const HireMe = () => {
       icon: <Code className="w-8 h-8" />,
       title: "Web Development",
       description: "Custom web applications built with React, Next.js, and modern technologies",
-      price: "Starting at $3,000",
+      price: "Starting at KES 30,000",
       features: [
         "Responsive design",
         "Modern frameworks",
@@ -34,25 +34,11 @@ const HireMe = () => {
       ],
     },
     {
-      id: "mobile-development",
-      icon: <Smartphone className="w-8 h-8" />,
-      title: "Mobile Development",
-      description: "React Native applications for iOS and Android platforms",
-      price: "Starting at $5,000",
-      features: [
-        "Cross-platform development",
-        "Native performance",
-        "App store deployment",
-        "Push notifications",
-        "Offline functionality",
-      ],
-    },
-    {
       id: "website-design",
       icon: <Globe className="w-8 h-8" />,
       title: "Website Design",
       description: "Beautiful, user-friendly websites that convert visitors into customers",
-      price: "Starting at $2,000",
+      price: "Starting at KES 20,000",
       features: [
         "Custom design",
         "User experience optimization",
@@ -62,11 +48,25 @@ const HireMe = () => {
       ],
     },
     {
+      id: "ecommerce-development",
+      icon: <ShoppingCart className="w-8 h-8" />,
+      title: "E-commerce Development",
+      description: "Powerful online stores designed to drive sales and manage inventory efficiently.",
+      price: "Starting at KES 60,000",
+      features: [
+        "Product and inventory management",
+        "Secure payment integration (Paystack, M-Pesa, etc.)",
+        "Order tracking and analytics",
+        "Mobile-friendly design",
+        "Admin dashboard and CMS integration",
+      ],
+    },
+    {
       id: "performance-optimization",
       icon: <Zap className="w-8 h-8" />,
       title: "Performance Optimization",
       description: "Improve your website's speed and performance for better user experience",
-      price: "Starting at $1,500",
+      price: "Starting at KES 15,000",
       features: [
         "Speed optimization",
         "Core Web Vitals",
@@ -101,28 +101,33 @@ const HireMe = () => {
   ];
 
   const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "CEO, TechStartup",
-      content: "John delivered an exceptional website that exceeded our expectations. His attention to detail and technical expertise are outstanding.",
-      rating: 5,
-      avatar: "👩‍💼",
-    },
-    {
-      name: "Michael Chen",
-      role: "Marketing Director",
-      content: "Working with John was a pleasure. He understood our needs perfectly and delivered a high-quality solution on time.",
-      rating: 5,
-      avatar: "👨‍💼",
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Product Manager",
-      content: "The React application John built for us is fast, responsive, and exactly what we needed. Highly recommended!",
-      rating: 5,
-      avatar: "👩‍💻",
-    },
+        {
+          name: "Lucas",
+          role: "Manager",
+          company: "Lukeman Homestays & Airbnb",
+          image: "/placeholder.svg",
+          content: "Working with Jorris was a dream. Responsive, creative, and always exceeding our wildest web dreams. Lukeman Homestays & Airbnb is forever grateful.",
+          rating: 5
+        },
+        {
+          name: "Edson Murimi",
+          role: "Founder",
+          company: "Edmil Solutions Ltd.",
+          image: "/placeholder.svg",
+          content: "Edmil Solution's sleek website perfectly balances professional and modern. Your design genius boosted inquiries, exceeding expectations!",
+          rating: 5
+        },
+        {
+          name: "Rajab Itambo",
+          role: "Director",
+          company: "Heart of Hep Foundation",
+          image: "/placeholder.svg",
+          content: "Jorris crafted a website that beautifully showcases our stories and impact. The interactive elements are engaging and keep visitors coming back.",
+          rating: 5
+        }
   ];
+
+  
 
   return (
     <div className="min-h-screen bg-background">
@@ -149,11 +154,11 @@ const HireMe = () => {
               that drives results for your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg" className="group">
+              <Button variant="hero" href="https://calendly.com/nyangejorris/30-minute-consultation" size="lg" className="group">
                 <Calendar className="w-4 h-4 mr-2" />
                 Schedule a Call
               </Button>
-              <Button variant="glass" size="lg">
+              <Button variant="glass" href="/contact" size="lg">
                 <DollarSign className="w-4 h-4 mr-2" />
                 Get a Quote
               </Button>
@@ -212,7 +217,7 @@ const HireMe = () => {
                     </div>
                     <p className="text-muted-foreground mb-6 text-lg">{service.description}</p>
                     <p className="text-2xl font-bold text-primary mb-6">{service.price}</p>
-                    <Button variant="hero" size="lg" className="group">
+                    <Button variant="hero" href="/contact" size="lg" className="group">
                       Get Started
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
                     </Button>
@@ -288,14 +293,14 @@ const HireMe = () => {
                       <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                  <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
                     "{testimonial.content}"
                   </p>
                   <div className="flex items-center gap-3">
-                    <div className="text-3xl">{testimonial.avatar}</div>
+                    {/* <div className="text-3xl">{testimonial.avatar}</div> */}
                     <div>
                       <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}  at {testimonial.company}</p>
                     </div>
                   </div>
                 </div>
@@ -317,7 +322,7 @@ const HireMe = () => {
           </AnimatedElement>
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <AnimatedElement animation="scale-in">
-              <div className="bg-gradient-card border border-border rounded-xl p-6 text-center">
+              <div className="bg-gradient-card border border-border rounded-xl p-6  text-center">
                 <Clock className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Response Time</h3>
                 <p className="text-muted-foreground">Within 24 hours</p>
@@ -327,7 +332,7 @@ const HireMe = () => {
               <div className="bg-gradient-card border border-border rounded-xl p-6 text-center">
                 <Calendar className="w-8 h-8 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Availability</h3>
-                <p className="text-muted-foreground">Starting January 2025</p>
+                <p className="text-muted-foreground">Monday - Friday <br />  09:00 - 17:00</p>
               </div>
             </AnimatedElement>
             <AnimatedElement animation="scale-in" delay={400}>
@@ -345,11 +350,11 @@ const HireMe = () => {
                 Let's discuss your requirements and create something amazing together.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="hero" size="lg" className="group">
+                <Button variant="hero" href="https://calendly.com/nyangejorris/30-minute-consultation" size="lg" className="group">
                   <Calendar className="w-4 h-4 mr-2" />
                   Schedule a Call
                 </Button>
-                <Button variant="glass" size="lg">
+                <Button variant="glass" href="mailto:nyangejorris@gmail.com" size="lg">
                   Send a Message
                 </Button>
               </div>

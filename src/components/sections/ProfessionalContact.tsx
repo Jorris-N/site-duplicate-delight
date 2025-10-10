@@ -146,7 +146,7 @@ export const ProfessionalContact = () => {
       value: "30-min consultation",
       description: "Free project consultation call",
       action: "Book Meeting",
-      href: "#",
+      href: "https://calendly.com/nyangejorris/30-minute-consultation",
       primary: false
     },
     {
@@ -190,7 +190,7 @@ export const ProfessionalContact = () => {
   const projectTypes = [
     "Web Application Development",
     "E-commerce Platform",
-    "Mobile App Development", 
+    "Website Development", 
     "UI/UX Implementation",
     "Technical Consulting",
     "Code Review & Optimization",
@@ -198,10 +198,10 @@ export const ProfessionalContact = () => {
   ];
 
   const budgetRanges = [
-    "$5,000 - $10,000",
-    "$10,000 - $25,000", 
-    "$25,000 - $50,000",
-    "$50,000+",
+    "KES 25,000 - KES 60,000",
+    "KES 65,000 - KES 100,000", 
+    "KES 125,000 - KES 200,000",
+    "KES 250,000+",
     "Let's discuss"
   ];
 
@@ -210,7 +210,7 @@ export const ProfessionalContact = () => {
       <div className="max-w-7xl mx-auto px-6">
         <AnimatedElement>
           <div className="text-center py-16">
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4" role="heading" aria-level={1}>
               Let's Build Something <span className="bg-gradient-primary bg-clip-text text-transparent">Amazing Together</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -477,11 +477,11 @@ export const ProfessionalContact = () => {
 
               <div className="mt-4 pt-4 border-t border-border/50">
                 <div className="flex gap-3">
-                  <Button variant="outline" size="sm" className="flex-1">
+                  <Button variant="outline" href="https://calendly.com/nyangejorris/30-minute-consultation" size="sm" className="flex-1">
                     <Calendar className="mr-2 h-4 w-4" />
                     Schedule Call
                   </Button>
-                  <Button variant="ghost" size="sm" className="flex-1">
+                  <Button variant="ghost" href="/hire-me" size="sm" className="flex-1">
                     <Star className="mr-2 h-4 w-4" />
                     Testimonials
                   </Button>
