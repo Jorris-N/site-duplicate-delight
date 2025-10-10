@@ -111,7 +111,7 @@ export const ProfessionalPortfolio = () => {
                 ))}
               </div>
             ) : (
-              <div className="grid lg:grid-cols-2 gap-8">
+              <div className="grid lg:grid-cols-3 gap-8">
                 {transformedFeaturedProjects.map((project, index) => (
                   <AnimatedElement key={project.id} delay={0.1 * index}>
                     <Card className="bg-card border-border shadow-card hover:shadow-glow transition-all duration-500 overflow-hidden group">
@@ -128,7 +128,7 @@ export const ProfessionalPortfolio = () => {
                       </div>
                       
                       <CardContent className="p-6">
-                        <h3 className="text-xl font-heading font-semibold mb-4 group-hover:text-primary transition-colors">
+                        <h3 className="text-base font-heading font-semibold mb-4 group-hover:text-primary transition-colors">
                           {project.title}
                         </h3>
                         
@@ -220,7 +220,7 @@ export const ProfessionalPortfolio = () => {
                   </div>
                   
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-heading font-semibold mb-4 group-hover:text-primary transition-colors">
+                    <h3 className="text-base font-heading font-semibold mb-4 group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
                     
@@ -303,7 +303,7 @@ export const ProfessionalPortfolio = () => {
               
               <div className="grid md:grid-cols-4 gap-8">
                 <div className="text-center">
-                  <div className="text-3xl font-heading font-bold text-primary mb-2">50+</div>
+                  <div className="text-3xl font-heading font-bold text-primary mb-2">30+</div>
                   <div className="text-muted-foreground">Projects Completed</div>
                 </div>
                 <div className="text-center">
@@ -315,7 +315,7 @@ export const ProfessionalPortfolio = () => {
                   <div className="text-muted-foreground">Happy Clients</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-heading font-bold text-primary mb-2">5M+</div>
+                  <div className="text-3xl font-heading font-bold text-primary mb-2">200K+</div>
                   <div className="text-muted-foreground">Users Impacted</div>
                 </div>
               </div>
