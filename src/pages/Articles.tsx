@@ -47,7 +47,7 @@ const Articles = () => {
 
   // Featured articles - 3 most recent
   const featuredArticles = useMemo(() => {
-    return articles.slice(0, 3);
+    return articles.slice(0, 2);
   }, [articles]);
 
   // All available tags from articles
@@ -59,9 +59,9 @@ const Articles = () => {
     return ["All", ...Array.from(tags)];
   }, [articles]);
 
-  // Articles for "All Articles" section - exclude the 3 most recent (featured)
+  // Articles for "All Articles" section - exclude the 2 most recent (featured)
   const nonFeaturedArticles = useMemo(() => {
-    return articles.slice(3);
+    return articles.slice(2);
   }, [articles]);
 
   // Filter articles based on search and tags
@@ -117,7 +117,7 @@ const Articles = () => {
           </AnimatedElement>
           
           {isLoading ? (
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-2 gap-8">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="bg-gradient-card border border-border rounded-2xl p-6">
                   <Skeleton className="w-full h-48 mb-6" />
@@ -133,7 +133,7 @@ const Articles = () => {
               <p className="text-muted-foreground text-lg">No featured articles yet.</p>
             </div>
           ) : (
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-2 gap-8">
               {featuredArticles.map((article, index) => (
                 <AnimatedElement 
                   key={article.id} 
@@ -226,7 +226,7 @@ const Articles = () => {
           </AnimatedElement>
           
           {isLoading ? (
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="bg-gradient-card border border-border rounded-xl p-6">
                   <Skeleton className="w-full h-48 mb-6" />
@@ -243,7 +243,7 @@ const Articles = () => {
             </div>
           ) : (
             <>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-3 gap-6">
                 {paginatedArticles.map((article, index) => (
                 <AnimatedElement 
                   key={article.id} 
