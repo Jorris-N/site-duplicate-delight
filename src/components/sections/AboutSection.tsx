@@ -12,7 +12,6 @@ export const AboutSection = () => {
     { name: "TypeScript", level: "Advanced", years: "3+" },
     { name: "JavaScript", level: "Expert", years: "4+" },
     { name: "Tailwind", level: "Expert", years: "4+" },
-    { name: "AWS", level: "Intermediate", years: "2+" },
   ];
 
   const achievements = [
@@ -38,7 +37,7 @@ export const AboutSection = () => {
 
   return (
     <section id="about" className="py-20 bg-background">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedElement>
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
@@ -54,7 +53,7 @@ export const AboutSection = () => {
           {/* Professional Summary */}
           <AnimatedElement delay={0.2}>
             <Card className="bg-card border-border shadow-card hover:shadow-glow transition-all duration-500">
-              <CardContent className="p-8">
+              <CardContent className="p-4 sm:p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 bg-primary/10 rounded-lg">
                     <Briefcase className="h-6 w-6 text-primary" />
@@ -101,7 +100,7 @@ export const AboutSection = () => {
           <div className="space-y-6">
             <AnimatedElement delay={0.4}>
               <Card className="bg-card border-border shadow-card">
-                <CardContent className="p-8">
+                <CardContent className="p-4 sm:p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-2 bg-primary/10 rounded-lg">
                       <Code2 className="h-6 w-6 text-primary" />
@@ -130,7 +129,7 @@ export const AboutSection = () => {
         <div>
             <AnimatedElement delay={0.6} className="py-16">
               <Card className="bg-card border-border shadow-card">
-                <CardContent className="p-8">
+                <CardContent className="p-4 sm:p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-2 bg-primary/10 rounded-lg">
                       <GraduationCap className="h-6 w-6 text-primary" />
