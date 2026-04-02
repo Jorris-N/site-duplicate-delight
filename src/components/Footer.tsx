@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
   const quickLinks = [
     { name: 'Home', href: '/' },
@@ -134,11 +135,7 @@ export const Footer = () => {
         <div className="border-t border-border">
           <div className="max-w-7xl mx-auto px-6 py-6">
             <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <span>© 2025 Jorris. All rights reserved.</span>
-              <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline">Made with</span>
-              <Heart className="w-4 h-4 text-red-500 animate-pulse hidden md:inline" />
-              <span className="hidden md:inline">using React & Tailwind</span>
+              <span>© {currentYear} Jorris • All rights reserved.</span>
             </div>
           </div>
         </div>

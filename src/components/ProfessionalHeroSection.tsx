@@ -93,7 +93,7 @@ export const ProfessionalHeroSection = () => {
                 View My Portfolio
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" href="/Jorris_Nyange_CV.pdf" target="_blank" size="lg" className="group font-medium">
+              <Button variant="outline" href="/Jorris-Nyange-Resume.pdf" target="_blank" size="lg" className="group font-medium">
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
                 <ExternalLink className="ml-2 h-3 w-3" />
