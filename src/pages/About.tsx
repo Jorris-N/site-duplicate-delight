@@ -73,7 +73,7 @@ const About = () => {
                   <span className="text-green-400">Available for freelance</span>
                 </div>
               </div>
-              <Button variant="hero" href="/Jorris_Nyange_CV.pdf" target="_blank" size="lg" className="group">
+              <Button variant="hero" href="/Jorris-Nyange-Resume.pdf" target="_blank" size="lg" className="group">
                 <Download className="mr-2 w-4 h-4" />
                 Download Resume
               </Button>
